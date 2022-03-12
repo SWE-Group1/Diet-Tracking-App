@@ -1,0 +1,9 @@
+.body{
+
+
+    -fx-background-image: url(food_bg02css.png);
+    -fx-background-size: contain;
+    -fx-background-position center;
+    -fx-background-repeat: no-repeat;
+
+}
