@@ -44,8 +44,9 @@ public class FoodObject {
 
     @Override
     public String toString() {
-        return "calories: "+ calories + " fats: " + fats + " saturatedFats: "+ saturatedFats + " transFat: " + transFat +
-                "sodium: "+ sodium + " fiber: " + fiber + " carbs: "+ carbs + " sugars: " + sugars + " protein: "+ protein + " potassium: " + potassium;
+        return ("▬").repeat(10) + "\ncalories: "+ calories + "\nfats: " + fats + "\nsaturatedFats: "+ saturatedFats + "\ntransFat: " + transFat +
+                "\nsodium: "+ sodium + "\nfiber: " + fiber + "\ncarbs: "+ carbs + "\nsugars: " + sugars + "\nprotein: "+ protein + "\npotassium: " + potassium +
+                "\n"+ ("▬").repeat(10);
     }
     /*
     public FoodObject(JSONArray entry) {
