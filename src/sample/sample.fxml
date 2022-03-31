@@ -7,7 +7,7 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.SearchScene">
+<AnchorPane xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.SearchScene">
    <children>
       <AnchorPane prefHeight="500.0" prefWidth="900.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -43,9 +43,22 @@
                         <Image url="@../../images/search%20icon.png" />
                      </image>
                   </ImageView>
-                  <TextField fx:id="searchTextFieldBrand" layoutX="46.0" layoutY="117.0" prefHeight="31.0" prefWidth="192.0" promptText="Enter Brand Here" style="-fx-background-color: #FFFFFF;" AnchorPane.bottomAnchor="69.0" AnchorPane.leftAnchor="46.0" AnchorPane.topAnchor="117.0" />
+                  <TextField fx:id="searchTextFieldBrand" layoutX="46.0" layoutY="117.0" prefHeight="31.0" prefWidth="192.0" promptText="Enter Brand Owner Here" style="-fx-background-color: #FFFFFF;" AnchorPane.bottomAnchor="69.0" AnchorPane.leftAnchor="46.0" AnchorPane.topAnchor="117.0" />
+                  <JFXButton fx:id="addButton" layoutX="29.0" layoutY="179.0" onAction="#addFood" prefHeight="24.0" prefWidth="92.0" style="-fx-background-color: #FFFFFF;" text="Add Food">
+                     <font>
+                        <Font name="System Bold" size="11.0" />
+                     </font>
+                  </JFXButton>
                </children></AnchorPane>
             <ListView fx:id="searchList" editable="true" layoutX="182.0" layoutY="257.0" prefHeight="244.0" prefWidth="612.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="180.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="256.0" />
+            <TableView fx:id="tableList" layoutX="181.0" layoutY="256.0" prefHeight="244.0" prefWidth="520.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="181.0" AnchorPane.rightAnchor="199.0" AnchorPane.topAnchor="256.0">
+              <columns>
+                <TableColumn fx:id="FoodNameColumn" prefWidth="194.0" text="Food Name" />
+                <TableColumn prefWidth="117.0" text="FDCID" />
+                  <TableColumn prefWidth="107.0" text="DataType" />
+                  <TableColumn prefWidth="101.0" text="Serving Size" />
+              </columns>
+            </TableView>
          </children>
       </AnchorPane>
    </children>

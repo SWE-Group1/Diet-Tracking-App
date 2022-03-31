@@ -14,6 +14,12 @@ public class FoodData {
     //Paste into url to play around with search results
     //https://api.nal.usda.gov/fdc/v1/foods/search?api_key=KwfuFLiBA0GH55zdagUsasX7RFseFJJoSGbPEFYj&query=Apple&dataType=Survey%20%28FNDDS%29&pageSize=20&pageNumber=1
 
+    // using FDC ID
+    //https://api.nal.usda.gov/fdc/v1/food/######?api_key=DEMO_KEY
+
+    // https://api.nal.usda.gov/fdc/v1/food/1102670?api_key=KwfuFLiBA0GH55zdagUsasX7RFseFJJoSGbPEFYj <<--- Generic fdcid Search
+    // https://api.nal.usda.gov/fdc/v1/food/1901367?api_key=KwfuFLiBA0GH55zdagUsasX7RFseFJJoSGbPEFYj <<--- Branded fdcid Search
+
     public static ArrayList<SearchObject> searchResult = new ArrayList<>();
 
     private static final String API_KEY = "KwfuFLiBA0GH55zdagUsasX7RFseFJJoSGbPEFYj";
@@ -22,13 +28,13 @@ public class FoodData {
     public static int totalHits = 0;
 
     // Search for food to select (end goal: return fdcId)
-    public static void searchFood(String foodName, boolean isBranded, String brandName, int page){
+    public static void searchFood(String foodName, boolean isBranded, String brandOwner, int page){
         String data = "";
         pageSize = 50;
         pageNumber = 1;
         totalHits = 0;
         try {
-            String searchURL = makeURL(foodName, isBranded, brandName);
+            String searchURL = makeSearchURL(foodName, isBranded, brandOwner);
             URL url = new URL(searchURL);
 
             // Attempt to connect
@@ -93,11 +99,93 @@ public class FoodData {
     }
 
     // Get Nutritional Facts from desired fdcId (end goal: create new FoodObject with stored information)
-    public static void getNutrition(){
+    public static void getNutrition(int fdcID, boolean isBranded){
+        try{
+            String data;
+            URL url = new URL("https://api.nal.usda.gov/fdc/v1/food/" + fdcID + "?api_key=" + API_KEY);
+
+            // Attempt to connect
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("GET");
+            conn.connect();
+
+            //Check if connection is made
+            int responseCode = conn.getResponseCode();
+
+            // 200 = Good Connection
+            if (responseCode != 200) {
+                throw new RuntimeException("HttpResponseCode: " + responseCode);
+            } else {
+
+                StringBuilder informationString = new StringBuilder();
+                Scanner scanner = new Scanner(url.openStream());
+
+                while (scanner.hasNext()) {
+                    informationString.append(scanner.nextLine());
+                }
+
+                scanner.close();                                                // Close the scanner
+
+                data = informationString.toString();                            // Copy data to string
+
+                JSONObject dataObject = (JSONObject) JSONValue.parse(data);     // Parse data as string to JSONObject
+
+                addFoodObject(dataObject,isBranded);
+            }
+
+        }catch(Exception e){
+            // Generic exception handling put more specific catch blocks above
+            System.out.println("Error: " + e.getMessage());
+
+            e.printStackTrace();// Remove later, only here for debugging
+        }
+
 
     }
 
-    public static String makeURL(String foodName, boolean isBranded, String brandName){
+    public static void addFoodObject(JSONObject data, boolean isBranded){
+
+        // Parse JSONObject data and add nutritional facts to new FoodObject
+
+        JSONObject labelNutrients = (JSONObject) data.get("labelNutrients"); //We create a JSONObject for labels by default it is null if it cannot be initialized
+
+        if(isBranded && labelNutrients != null){ // If "labelNutrients" is not empty (null), use labelNutrients to create FoodObject
+
+                FoodObject food = new FoodObject( new double[] //These labels are all based on the order of the FoodObject attributes
+                        {
+                                (((JSONObject) labelNutrients.get("calories")) != null) ? Double.parseDouble(((JSONObject) labelNutrients.get("calories")).get("value").toString()) : 0,
+                                (((JSONObject) labelNutrients.get("fat")) != null) ? Double.parseDouble(((JSONObject) labelNutrients.get("fat")).get("value").toString()) : 0,
+                                (((JSONObject) labelNutrients.get("saturatedFat")) != null) ? Double.parseDouble(((JSONObject) labelNutrients.get("saturatedFat")).get("value").toString()) : 0,
+                                (((JSONObject) labelNutrients.get("transFat")) != null) ? Double.parseDouble(((JSONObject) labelNutrients.get("transFat")).get("value").toString()) : 0,
+                                (((JSONObject) labelNutrients.get("sodium")) != null) ? Double.parseDouble(((JSONObject) labelNutrients.get("sodium")).get("value").toString()) : 0,
+                                (((JSONObject) labelNutrients.get("fiber")) != null) ? Double.parseDouble(((JSONObject) labelNutrients.get("fiber")).get("value").toString()) : 0,
+                                (((JSONObject) labelNutrients.get("carbohydrates")) != null) ? Double.parseDouble((((JSONObject) labelNutrients.get("carbohydrates")).get("value")).toString()) : 0,
+                                (((JSONObject) labelNutrients.get("sugars")) != null) ? Double.parseDouble(((JSONObject) labelNutrients.get("sugars")).get("value").toString()) : 0,
+                                (((JSONObject) labelNutrients.get("protein")) != null) ? Double.parseDouble(((JSONObject) labelNutrients.get("protein")).get("value").toString()) : 0,
+                                (((JSONObject) labelNutrients.get("potassium")) != null) ? Double.parseDouble(((JSONObject) labelNutrients.get("potassium")).get("value").toString()) : 0
+                        }
+                );
+
+             System.out.println(food.toString()); // Prints FoodObject label contents to the terminal window
+
+        }else{ // If "labelNutrients" is empty (null), use foodNutrients for FoodObject
+
+            System.out.println("Nutrition facts do not exist.\nCreating one now...\n"); // Notifying us about the nutrition facts
+
+/*          System.out.println(food.toString());
+
+            JSONArray foodNutrients = (JSONArray) data.get("foodNutrients");    // Gets foodNutrients JSON object array
+
+            for(Object entry : foodNutrients){
+
+            }
+*/
+        }
+
+
+    }
+
+    public static String makeSearchURL(String foodName, boolean isBranded, String brandOwner){
         String url = "";
         String dataType = "";
         String[] food = foodName.split(" ");
@@ -120,11 +208,12 @@ public class FoodData {
             dataType = "Survey%20%28FNDDS%29"; // "Survey (FNDDS)"
 
             url = "https://api.nal.usda.gov/fdc/v1/foods/search?api_key="+API_KEY+"&query="+foodName+"&dataType="+dataType+"&pageSize="+pageSize+"&pageNumber="+pageNumber;
+            System.out.println(url);
             return url;
 
         }else{
             // Search for brand
-            String[] brand = brandName.split(" ");
+            String[] brand = brandOwner.split(" ");
             String tempBrand = "";
 
             // Parse foodName to be query
@@ -149,12 +238,19 @@ public class FoodData {
                 }
             }
             foodName = tempFood;
-            brandName = tempBrand;
+            brandOwner = tempBrand;
             dataType = "Branded";
 
-            url = "https://api.nal.usda.gov/fdc/v1/foods/search?api_key="+API_KEY+"&query="+foodName+"&dataType="+dataType+"&pageSize="+pageSize+"&pageNumber="+pageNumber+"&brandOwner="+brandName;
+            url = "https://api.nal.usda.gov/fdc/v1/foods/search?api_key="+API_KEY+"&query="+foodName+"&dataType="+dataType+"&pageSize="+pageSize+"&pageNumber="+pageNumber+"&brandOwner="+brandOwner;
+
+            // Print URL (Debugging - Remove Later)
+            System.out.println(url);
+
             return url;
         }
 
     }
+
+
+
 }
