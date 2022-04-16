@@ -19,14 +19,19 @@ public class Main extends Application {
 
     public static void main(String[] args) {
         // Read FoodHistoryLog
+        System.out.println("Program starting, reading data from FoodHistoryLog");
         Log.read();
+
+
         launch(args);
     }
 
     @Override
     public void stop(){
-        System.out.println("Stage is closing");
-        Log.save();
+        System.out.println("Stage is closing, Saving food history to FoodHistoryLog");
+
         // Save FoodHistoryLog
+        Log.save();
+
     }
 }
