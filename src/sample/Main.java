@@ -10,7 +10,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("SearchScene.fxml"));
         primaryStage.setTitle("Diet Tracking App");
         primaryStage.setScene(new Scene(root, 900, 500));
         primaryStage.show();
@@ -18,9 +18,15 @@ public class Main extends Application {
 
 
     public static void main(String[] args) {
-        //FoodData.searchFood("Mango",false,"",1);
-        //FoodData.searchFood("Mango",true,"MARIANI",1);
-
+        // Read FoodHistoryLog
+        Log.read();
         launch(args);
+    }
+
+    @Override
+    public void stop(){
+        System.out.println("Stage is closing");
+        Log.save();
+        // Save FoodHistoryLog
     }
 }

@@ -7,7 +7,7 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.SearchScene">
+<AnchorPane xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.SceneController">
    <children>
       <AnchorPane prefHeight="500.0" prefWidth="900.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -18,12 +18,12 @@
                         <Font name="System Bold" size="16.0" />
                      </font>
                   </JFXButton>
-                  <JFXButton layoutX="10.0" layoutY="10.0" prefHeight="37.0" prefWidth="182.0" text="HISTORY" textFill="WHITE">
+                  <JFXButton layoutX="10.0" layoutY="10.0" onAction="#switchToHistoryScene" prefHeight="37.0" prefWidth="182.0" text="HISTORY" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
                   </JFXButton>
-                  <JFXButton layoutX="10.0" layoutY="48.0" prefHeight="37.0" prefWidth="182.0" text="SUMMARY" textFill="WHITE">
+                  <JFXButton layoutX="10.0" layoutY="48.0" onAction="#switchToSummaryScene" prefHeight="37.0" prefWidth="182.0" text="SUMMARY" textFill="WHITE">
                      <font>
                         <Font name="System Bold" size="16.0" />
                      </font>
@@ -50,13 +50,13 @@
                      </font>
                   </JFXButton>
                </children></AnchorPane>
-            <ListView fx:id="searchList" editable="true" layoutX="182.0" layoutY="257.0" prefHeight="244.0" prefWidth="612.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="180.0" AnchorPane.rightAnchor="200.0" AnchorPane.topAnchor="256.0" />
-            <TableView fx:id="tableList" layoutX="181.0" layoutY="256.0" prefHeight="244.0" prefWidth="520.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="181.0" AnchorPane.rightAnchor="199.0" AnchorPane.topAnchor="256.0">
+            <TableView fx:id="tableList" layoutX="181.0" layoutY="256.0" prefHeight="244.0" prefWidth="593.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="181.0" AnchorPane.rightAnchor="126.0" AnchorPane.topAnchor="256.0">
               <columns>
-                <TableColumn fx:id="FoodNameColumn" prefWidth="194.0" text="Food Name" />
-                <TableColumn prefWidth="117.0" text="FDCID" />
-                  <TableColumn prefWidth="107.0" text="DataType" />
-                  <TableColumn prefWidth="101.0" text="Serving Size" />
+                <TableColumn fx:id="FoodNameCol" prefWidth="194.0" text="Food" />
+                  <TableColumn fx:id="BrandOwner" prefWidth="145.4000244140625" text="Brand Owner" />
+                <TableColumn fx:id="FDCID" prefWidth="69.79998779296875" text="FDCID" />
+                  <TableColumn fx:id="DataType" minWidth="8.79998779296875" prefWidth="122.0" text="DataType" />
+                  <TableColumn fx:id="ServingSize" prefWidth="190.4000244140625" text="Serving Size" />
               </columns>
             </TableView>
          </children>

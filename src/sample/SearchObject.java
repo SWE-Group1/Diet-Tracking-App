@@ -27,27 +27,12 @@ public class SearchObject {
         if(entry.get("servingSize") != null)
             servingSize = Double.parseDouble(String.valueOf(entry.get("servingSize")));
 
-
-
-
-        if(foodName != null && foodName.length() >= 30){
-            foodName = foodName.substring(0,30);
-        }
-        else{
-
-            foodName = String.format("%-30s",foodName).replace(' ','*');
-            //foodName = foodName.replace('*',' ');
-
-        }
-
-
-
     }
 
     @Override
     public String toString(){
-        return "FoodName: " + foodName + "\t\t\t\t\t\t fdcId: " + fdcId + "\t\t\t\t\t\t dataType: " + dataType + "\t\t\t\t\t\t brandName: " + brandOwner + "\t\t\t\t\t\t servingSize: " + servingSize;
-        //return "FoodName: " + foodName + "                    " + " fdcId: " + fdcId + "                    " + " dataType: " + dataType + "                    " + " brandName: " + brandOwner + "                    " + " servingSize: " + servingSize;
+        return "FoodName: " + foodName + "\t fdcId: " + fdcId + "\t dataType: " + dataType + "\tbrandName: " + brandOwner + "\t servingSize: " + servingSize;
+
     }
 
     public String getFoodName() {
