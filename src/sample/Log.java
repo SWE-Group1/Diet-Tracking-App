@@ -75,6 +75,7 @@ public class Log {
         }
         else
         {
+             currentEntryDate = new JSONObject();
              foods = new JSONArray();
              nutritionalFacts = new JSONObject();
         }
