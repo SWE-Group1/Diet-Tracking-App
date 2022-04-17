@@ -20,6 +20,7 @@ public class Log {
     public static JSONObject currentEntryDate;
     public static JSONObject nutritionalFacts;
     public static JSONArray foods;
+    public static JSONArray foodIds;
 
 
 
@@ -71,11 +72,14 @@ public class Log {
 
         if(currentEntryDate != null){
             foods = (JSONArray) currentEntryDate.get("foods");
+            foodIds = (JSONArray) currentEntryDate.get("foodIds");
             nutritionalFacts = (JSONObject) currentEntryDate.get("nutritionalFacts");
         }
         else
         {
+             currentEntryDate = new JSONObject();
              foods = new JSONArray();
+             foodIds = new JSONArray();
              nutritionalFacts = new JSONObject();
         }
 
@@ -84,10 +88,28 @@ public class Log {
     // Initializes daily food list and nutrients list
     public static void initializeDailyValues(){
 
+        // Initialize foods
         if(foods != null) {
             for (int i = 0; i < foods.size(); i++) {
                 FoodObject.dailyFood.add(foods.get(i).toString());
             }
+        }else{
+            foods = new JSONArray();
+        }
+
+        // Initialize food ids
+        if(foodIds != null) {
+            for (int i = 0; i < foodIds.size(); i++) {
+                FoodObject.dailyFoodIds.add(Integer.parseInt(foodIds.get(i).toString()));
+            }
+        }else{
+            foodIds = new JSONArray();
+        }
+
+        // Initialize foods  nutritional facts
+
+        if(nutritionalFacts == null){
+            nutritionalFacts = new JSONObject();
         }
 
       if(  nutritionalFacts.get("calories") != null ){FoodObject.dailyNutrients[0] = Double.parseDouble(nutritionalFacts.get("calories").toString());}
@@ -164,19 +186,23 @@ public class Log {
             if(!foods.isEmpty()){foods.clear();}
             foods.addAll(FoodObject.dailyFood);
 
+            if(!foodIds.isEmpty()){foodIds.clear();}
+            foodIds.addAll(FoodObject.dailyFoodIds);
+
             nutritionalFacts.put("calories",FoodObject.dailyNutrients[0]);
-            nutritionalFacts.put("fats",FoodObject.dailyNutrients[0]);
-            nutritionalFacts.put("saturatedFats",FoodObject.dailyNutrients[0]);
-            nutritionalFacts.put("transFat",FoodObject.dailyNutrients[0]);
-            nutritionalFacts.put("sodium",FoodObject.dailyNutrients[0]);
-            nutritionalFacts.put("fiber",FoodObject.dailyNutrients[0]);
-            nutritionalFacts.put("carbs",FoodObject.dailyNutrients[0]);
-            nutritionalFacts.put("sugars",FoodObject.dailyNutrients[0]);
-            nutritionalFacts.put("protein",FoodObject.dailyNutrients[0]);
-            nutritionalFacts.put("cholesterol",FoodObject.dailyNutrients[0]);
+            nutritionalFacts.put("fats",FoodObject.dailyNutrients[1]);
+            nutritionalFacts.put("saturatedFats",FoodObject.dailyNutrients[2]);
+            nutritionalFacts.put("transFat",FoodObject.dailyNutrients[3]);
+            nutritionalFacts.put("sodium",FoodObject.dailyNutrients[4]);
+            nutritionalFacts.put("fiber",FoodObject.dailyNutrients[5]);
+            nutritionalFacts.put("carbs",FoodObject.dailyNutrients[6]);
+            nutritionalFacts.put("sugars",FoodObject.dailyNutrients[7]);
+            nutritionalFacts.put("protein",FoodObject.dailyNutrients[8]);
+            nutritionalFacts.put("cholesterol",FoodObject.dailyNutrients[9]);
 
             currentEntryDate.put("nutritionalFacts",nutritionalFacts);
             currentEntryDate.put("foods",foods);
+            currentEntryDate.put("foodIds",foodIds);
 
             logFileObject.put(getDate(),currentEntryDate);
 
@@ -203,5 +229,10 @@ public class Log {
             System.out.println("Error: " + e.getMessage());
             e.printStackTrace();
         }
+    }
+
+    public static JSONObject searchFoodHistoryLog (String key){
+        // Handle case if key value return null
+        return (JSONObject) logFileObject.get(key);
     }
 }

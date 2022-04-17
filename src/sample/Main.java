@@ -12,8 +12,10 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("SearchScene.fxml"));
         primaryStage.setTitle("Diet Tracking App");
-        primaryStage.setScene(new Scene(root, 900, 500));
+        primaryStage.setScene(new Scene(root, 1000, 700));
         primaryStage.show();
+
+        SceneController.setSceneDetails(primaryStage.getScene());
     }
 
 

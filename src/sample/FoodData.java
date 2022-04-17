@@ -122,7 +122,8 @@ public class FoodData {
 
                 JSONObject dataObject = (JSONObject) JSONValue.parse(data);     // Parse data as string to JSONObject
 
-                addFoodObject(dataObject,isBranded,foodResult);
+                addFoodObject(dataObject,isBranded,foodResult,fdcID);
+
             }
 
         }catch(Exception e){
@@ -136,7 +137,7 @@ public class FoodData {
     }
 
     // Parse Nutritional Data and creates food objects -- Method called by FoodData->getNutrition
-    public static void addFoodObject(JSONObject data, boolean isBranded, SearchObject foodResult){
+    public static void addFoodObject(JSONObject data, boolean isBranded, SearchObject foodResult, int fdcID){
 
         // Parse JSONObject data and add nutritional facts to new FoodObject
 
@@ -161,6 +162,7 @@ public class FoodData {
                 );
                 food.setDescription(foodResult);    // Sets food description
                 FoodObject.addFoodToList(food);     // Add food to daily consumed foods
+                FoodObject.addFoodId(fdcID);        // Add food id of daily consumed food
                 food.addNutrientsToList(food);      // Adds food's nutrients to daily foods
 
                 System.out.println(food); // Prints FoodObject label contents to the terminal window
@@ -216,6 +218,7 @@ public class FoodData {
             FoodObject food = new FoodObject(foodNutrientsArray);
             food.setDescription(foodResult);    // Sets food description
             FoodObject.addFoodToList(food);     // Add food to daily consumed foods
+            FoodObject.addFoodId(fdcID);        // Add food id of daily consumed food
             food.addNutrientsToList(food);      // Adds food's nutrients to daily foods
 
             System.out.println(food);

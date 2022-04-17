@@ -9,6 +9,7 @@ import java.util.ArrayList;
 public class FoodObject {
     // Added Foods are stored in this arrayList (Only stores daily consumption)
     public static ArrayList<String> dailyFood = new ArrayList<>();
+    public static ArrayList<Integer> dailyFoodIds = new ArrayList<>();
     public static double[] dailyNutrients = new double[10];
 
     // FoodObject Description
@@ -42,6 +43,8 @@ public class FoodObject {
     public static void addFoodToList(FoodObject food){
         dailyFood.add(food.foodName);
     }
+    public static void addFoodId(int id){dailyFoodIds.add(id);}
+
     public static void removeFoodFromList(int index){dailyFood.remove(index);}
 
     public void addNutrientsToList(FoodObject food){
