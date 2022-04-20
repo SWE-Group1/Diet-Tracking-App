@@ -170,7 +170,7 @@ public class FoodData {
         }else{
         // If "labelNutrients" is empty (null), use foodNutrients for FoodObject
 
-            System.out.println("labelNutrients does not exist.\nUsing foodNutrients data\n"); // Notifying us about the nutrition facts
+            System.out.println(" \u001b[93mWarning\u001b[0m → labelNutrients does not exist.\n \u001b[92mUpdate\u001b[0m → Creating one via foodNutrients..."); // Notifying us about the nutrition facts
 
             JSONArray foodNutrients = (JSONArray) data.get("foodNutrients");    // Gets foodNutrients JSON object array
 
@@ -379,7 +379,7 @@ public class FoodData {
 
             // If "labelNutrients" is empty (null), use foodNutrients for FoodObject
 
-            System.out.println("labelNutrients does not exist.\nUsing foodNutrients data\n"); // Notifying us about the nutrition facts
+            System.out.println(" \u001b[93mWarning\u001b[0m → labelNutrients does not exist.\n \u001b[92mUpdate\u001b[0m → Creating one via foodNutrients..."); // Notifying us about the nutrition facts
 
             JSONArray foodNutrients = (JSONArray) data.get("foodNutrients");    // Gets foodNutrients JSON object array
 
@@ -429,7 +429,7 @@ public class FoodData {
             tempFood.removeNutrientsFromList(tempFood); // Removes food nutrients from daily list
         }
 
-        System.out.println("Removing nutritional data...");
+        System.out.println("\u001b[92mUpdate\u001b[0m → Removing nutritional data..."); // Update on nutritional data removal
         System.out.println(("▬").repeat(10) + "\ncalories: "+ FoodObject.dailyNutrients[0] + "\nfats: " + FoodObject.dailyNutrients[1] + "\nsaturatedFats: "+ FoodObject.dailyNutrients[2] + "\ntransFat: " + FoodObject.dailyNutrients[3] +
                 "\nsodium: "+ FoodObject.dailyNutrients[4] + "\nfiber: " + FoodObject.dailyNutrients[5] + "\ncarbs: "+ FoodObject.dailyNutrients[6] + "\nsugars: " + FoodObject.dailyNutrients[7] +
                 "\nprotein: "+ FoodObject.dailyNutrients[8] + "\ncholesterol: " + FoodObject.dailyNutrients[9] + "\n"+ ("▬").repeat(10));

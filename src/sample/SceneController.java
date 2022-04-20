@@ -148,19 +148,18 @@ public class SceneController {
         }
     }
 
-    public void addFood(){
-
+    public void addFood() {
         System.out.println("Adding To Daily Foods: " + tableList.getSelectionModel().getSelectedItem());
+        try {
+            int index = tableList.getSelectionModel().getSelectedIndex();   // Get index of search results from TableView
+            int fdcID = FoodData.searchResult.get(index).fdcId;             // Get fdcID
+            boolean isBranded = false;
 
-        int index = tableList.getSelectionModel().getSelectedIndex();   // Get index of search results from TableView
-        int fdcID = FoodData.searchResult.get(index).fdcId;             // Get fdcID
-        boolean isBranded = false;
+            //Make sure to implement a condition that prevents the user from adding the same item twice.
+            isBranded = (FoodData.searchResult.get(index).dataType != "Survey (FNDDS)");
 
-        //Make sure to implement a condition that prevents the user from adding the same item twice.
-        isBranded = (FoodData.searchResult.get(index).dataType != "Survey (FNDDS)");
-
-
-        FoodData.getNutrition(fdcID,isBranded,FoodData.searchResult.get(index));                                   // Creates FoodObject and adds to daily consumption
+            FoodData.getNutrition(fdcID,isBranded,FoodData.searchResult.get(index));    // Creates FoodObject and adds to daily consumption
+        } catch (Exception e) {System.out.println(" \u001b[91mError\u001b[0m → \u001b[91mUser did not select a food item to add to the list!\u001b[0m");} // Error msg
     }
     //=================================================================
 
