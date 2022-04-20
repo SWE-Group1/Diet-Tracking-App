@@ -238,26 +238,7 @@ public class SceneController {
 
     // Only removes food from the current day not days from the past
     public void removeFood(){
-/*
-        if(datePicker.getValue() == null){
-            historyLabel.setText("Select a date before searching");
-            return;
-        }
 
-        String date = datePicker.getValue().toString();
-
-        String month = date.substring(5,7);
-        String day = date.substring(8,10);
-        String year = date.substring(0,4);
-
-        String key = month + '-' + day + '-' + year;
-
-        // Trying to remove food from a day in the past (should always be false since remove button isn't visible for days in the past)
-        if(!key.equals(Log.getDate())){
-            historyLabel.setText("You can only remove food from the current day");
-            return;
-        }
-*/
         // Clicked remove but haven't selected a food
         if(historyFoodList.getSelectionModel().isEmpty()){
             historyLabel.setText("Select a food from the list before removing");
@@ -267,17 +248,40 @@ public class SceneController {
         int index = historyFoodList.getSelectionModel().getSelectedIndex();
 
         // Search food from fdcID (might have to make new search method)
-        // Remove nutrional values from daily values
-        // Remove food and id from both list
-        // refresh historyFoodList
+        // Remove nutritional values from daily values
+        int foodID = FoodObject.dailyFoodIds.get(index);
+        FoodData.getNutrition(foodID);
 
-        //System.out.println("Should remove index " + index + ": " + FoodObject.dailyFood.get(index));
+        // Remove food and id from both list
+        FoodObject.dailyFood.remove(index);
+        FoodObject.dailyFoodIds.remove(index);
+
+        // refresh historyFoodList
+        historyFoodList.getItems().clear();
+        removeButton.setVisible(false);
+
+        if(!FoodObject.dailyFood.isEmpty()){
+
+            for(int i = 0; i < FoodObject.dailyFood.size(); i++){
+                historyFoodList.getItems().add((i+1) + ": " + FoodObject.dailyFood.get(i));
+            }
+
+            removeButton.setVisible(true);
+            return;
+
+        }else{
+            // Daily Foods consumed is empty
+            historyLabel.setText("");
+            return;
+        }
 
     }
 
     //=================================================================
 
     // SUMMARY SCENE VARIABLES ========================================
+
+        // Display Contents of FoodObject.dailyNutrients array on summary scene
 
 
 

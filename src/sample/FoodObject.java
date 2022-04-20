@@ -48,29 +48,30 @@ public class FoodObject {
     public static void removeFoodFromList(int index){dailyFood.remove(index);}
 
     public void addNutrientsToList(FoodObject food){
-        dailyNutrients[0] += food.calories;
-        dailyNutrients[1] += food.fats;
-        dailyNutrients[2] += food.saturatedFats;
-        dailyNutrients[3] += food.transFat;
-        dailyNutrients[4] += food.sodium;
-        dailyNutrients[5] += food.fiber;
-        dailyNutrients[6] += food.carbs;
-        dailyNutrients[7] += food.sugars;
-        dailyNutrients[8] += food.protein;
-        dailyNutrients[9] += food.cholesterol;
+        dailyNutrients[0] += Math.round(food.calories * 10) / 10;
+        dailyNutrients[1] += Math.round(food.fats * 10) / 10;
+        dailyNutrients[2] += Math.round(food.saturatedFats * 10) / 10;
+        dailyNutrients[3] += Math.round(food.transFat * 10) / 10;
+        dailyNutrients[4] += Math.round(food.sodium * 10) / 10;
+        dailyNutrients[5] += Math.round(food.fiber * 10) / 10;
+        dailyNutrients[6] += Math.round(food.carbs * 10) / 10;
+        dailyNutrients[7] += Math.round(food.sugars * 10) / 10;
+        dailyNutrients[8] += Math.round(food.protein * 10) / 10;
+        dailyNutrients[9] += Math.round(food.cholesterol * 10) / 10;
     }
 
     public void removeNutrientsFromList(FoodObject food){
-        dailyNutrients[0] -= food.calories;
-        dailyNutrients[1] -= food.fats;
-        dailyNutrients[2] -= food.saturatedFats;
-        dailyNutrients[3] -= food.transFat;
-        dailyNutrients[4] -= food.sodium;
-        dailyNutrients[5] -= food.fiber;
-        dailyNutrients[6] -= food.carbs;
-        dailyNutrients[7] -= food.sugars;
-        dailyNutrients[8] -= food.protein;
-        dailyNutrients[9] -= food.cholesterol;
+        dailyNutrients[0] -= Math.round(food.calories * 10) / 10;
+        dailyNutrients[1] -= Math.round(food.fats * 10) / 10;
+        dailyNutrients[2] -= Math.round(food.saturatedFats * 10) / 10;
+        dailyNutrients[3] -= Math.round(food.transFat * 10) / 10;
+        dailyNutrients[4] -= Math.round(food.sodium * 10) / 10;
+        dailyNutrients[5] -= Math.round(food.fiber * 10) / 10;
+        dailyNutrients[6] -= Math.round(food.carbs * 10) / 10;
+        dailyNutrients[7] -= Math.round(food.sugars * 10) / 10;
+        dailyNutrients[8] -= Math.round(food.protein * 10) / 10;
+        dailyNutrients[9] -= Math.round(food.cholesterol * 10) / 10;
+
     }
 
     @Override
