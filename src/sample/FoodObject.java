@@ -31,23 +31,33 @@ public class FoodObject {
     public double protein = 0;          // id = 1003    unit = g       max = 100g
     public double cholesterol = 0;      // id = 1253    unit = mg      max = 400mg
 
-    public FoodObject(double[] labelNutrients)
-    {
-        calories = labelNutrients[0]; fats = labelNutrients[1]; saturatedFats = labelNutrients[2];
-        transFat = labelNutrients[3]; sodium = labelNutrients[4]; fiber = labelNutrients[5];
-        carbs = labelNutrients[6]; sugars = labelNutrients[7]; protein = labelNutrients[8];
+    public FoodObject(double[] labelNutrients) {
+        calories = labelNutrients[0];
+        fats = labelNutrients[1];
+        saturatedFats = labelNutrients[2];
+        transFat = labelNutrients[3];
+        sodium = labelNutrients[4];
+        fiber = labelNutrients[5];
+        carbs = labelNutrients[6];
+        sugars = labelNutrients[7];
+        protein = labelNutrients[8];
         cholesterol = labelNutrients[9];
 
     }
 
-    public static void addFoodToList(FoodObject food){
+    public static void addFoodToList(FoodObject food) {
         dailyFood.add(food.foodName);
     }
-    public static void addFoodId(int id){dailyFoodIds.add(id);}
 
-    public static void removeFoodFromList(int index){dailyFood.remove(index);}
+    public static void addFoodId(int id) {
+        dailyFoodIds.add(id);
+    }
 
-    public void addNutrientsToList(FoodObject food){
+    public static void removeFoodFromList(int index) {
+        dailyFood.remove(index);
+    }
+
+    public void addNutrientsToList(FoodObject food) {
         dailyNutrients[0] += Math.round(food.calories * 10) / 10;
         dailyNutrients[1] += Math.round(food.fats * 10) / 10;
         dailyNutrients[2] += Math.round(food.saturatedFats * 10) / 10;
@@ -60,7 +70,7 @@ public class FoodObject {
         dailyNutrients[9] += Math.round(food.cholesterol * 10) / 10;
     }
 
-    public void removeNutrientsFromList(FoodObject food){
+    public void removeNutrientsFromList(FoodObject food) {
         dailyNutrients[0] -= Math.round(food.calories * 10) / 10;
         dailyNutrients[1] -= Math.round(food.fats * 10) / 10;
         dailyNutrients[2] -= Math.round(food.saturatedFats * 10) / 10;
@@ -76,21 +86,18 @@ public class FoodObject {
 
     @Override
     public String toString() {
-        return ("▬").repeat(10) + "\ncalories: "+ calories + "\nfats: " + fats + "\nsaturatedFats: "+ saturatedFats + "\ntransFat: " + transFat +
-                "\nsodium: "+ sodium + "\nfiber: " + fiber + "\ncarbs: "+ carbs + "\nsugars: " + sugars + "\nprotein: "+ protein + "\ncholesterol: " + cholesterol +
-                "\n"+ ("▬").repeat(10);
+        return ("▬").repeat(10) + "\ncalories: " + calories + "\nfats: " + fats + "\nsaturatedFats: " + saturatedFats + "\ntransFat: " + transFat +
+                "\nsodium: " + sodium + "\nfiber: " + fiber + "\ncarbs: " + carbs + "\nsugars: " + sugars + "\nprotein: " + protein + "\ncholesterol: " + cholesterol +
+                "\n" + ("▬").repeat(10);
     }
 
-    public void setDescription(SearchObject food){
+    public void setDescription(SearchObject food) {
         foodName = food.getFoodName();
         fdcId = food.getFdcId();
         dataType = food.getDataType();
         brandOwner = food.getBrandOwner();
         servingSize = food.getServingSize();
     }
-
-
-
 
 
 }

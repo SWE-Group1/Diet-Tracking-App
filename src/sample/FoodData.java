@@ -28,7 +28,7 @@ public class FoodData {
     public static int totalHits = 0;
 
     // Search for food to select (end goal: return fdcId)
-    public static void searchFood(String foodName, boolean isBranded, String brandOwner, int page){
+    public static void searchFood(String foodName, boolean isBranded, String brandOwner, int page) {
         String data = "";
         pageSize = 50;
         pageNumber = 1;
@@ -81,7 +81,7 @@ public class FoodData {
 
             }
 
-        }catch(Exception e){
+        } catch (Exception e) {
             // Generic exception handling put more specific catch blocks above
             System.out.println("Error: " + e.getMessage());
 
@@ -91,8 +91,8 @@ public class FoodData {
     }
 
     // Get Nutritional Facts from desired fdcId (end goal: create new FoodObject with stored information)
-    public static void getNutrition(int fdcID, boolean isBranded, SearchObject foodResult){
-        try{
+    public static void getNutrition(int fdcID, boolean isBranded, SearchObject foodResult) {
+        try {
             String data;
             URL url = new URL("https://api.nal.usda.gov/fdc/v1/food/" + fdcID + "?api_key=" + API_KEY);
 
@@ -122,11 +122,11 @@ public class FoodData {
 
                 JSONObject dataObject = (JSONObject) JSONValue.parse(data);     // Parse data as string to JSONObject
 
-                addFoodObject(dataObject,isBranded,foodResult,fdcID);
+                addFoodObject(dataObject, isBranded, foodResult, fdcID);
 
             }
 
-        }catch(Exception e){
+        } catch (Exception e) {
             // Generic exception handling put more specific catch blocks above
             System.out.println("Error: " + e.getMessage());
 
@@ -137,38 +137,38 @@ public class FoodData {
     }
 
     // Parse Nutritional Data and creates food objects -- Method called by FoodData->getNutrition
-    public static void addFoodObject(JSONObject data, boolean isBranded, SearchObject foodResult, int fdcID){
+    public static void addFoodObject(JSONObject data, boolean isBranded, SearchObject foodResult, int fdcID) {
 
         // Parse JSONObject data and add nutritional facts to new FoodObject
 
         JSONObject labelNutrients = (JSONObject) data.get("labelNutrients"); //We create a JSONObject for labels by default it is null if it cannot be initialized
 
         // If "labelNutrients" is not empty (null), use labelNutrients to create FoodObject
-        if(isBranded && labelNutrients != null){
+        if (isBranded && labelNutrients != null) {
 
-                FoodObject food = new FoodObject( new double[] //These labels are all based on the order of the FoodObject attributes
-                        {
-                                (((JSONObject) labelNutrients.get("calories")) != null) ? Double.parseDouble(((JSONObject) labelNutrients.get("calories")).get("value").toString()) : 0,
-                                (((JSONObject) labelNutrients.get("fat")) != null) ? Double.parseDouble(((JSONObject) labelNutrients.get("fat")).get("value").toString()) : 0,
-                                (((JSONObject) labelNutrients.get("saturatedFat")) != null) ? Double.parseDouble(((JSONObject) labelNutrients.get("saturatedFat")).get("value").toString()) : 0,
-                                (((JSONObject) labelNutrients.get("transFat")) != null) ? Double.parseDouble(((JSONObject) labelNutrients.get("transFat")).get("value").toString()) : 0,
-                                (((JSONObject) labelNutrients.get("sodium")) != null) ? Double.parseDouble(((JSONObject) labelNutrients.get("sodium")).get("value").toString()) : 0,
-                                (((JSONObject) labelNutrients.get("fiber")) != null) ? Double.parseDouble(((JSONObject) labelNutrients.get("fiber")).get("value").toString()) : 0,
-                                (((JSONObject) labelNutrients.get("carbohydrates")) != null) ? Double.parseDouble((((JSONObject) labelNutrients.get("carbohydrates")).get("value")).toString()) : 0,
-                                (((JSONObject) labelNutrients.get("sugars")) != null) ? Double.parseDouble(((JSONObject) labelNutrients.get("sugars")).get("value").toString()) : 0,
-                                (((JSONObject) labelNutrients.get("protein")) != null) ? Double.parseDouble(((JSONObject) labelNutrients.get("protein")).get("value").toString()) : 0,
-                                (((JSONObject) labelNutrients.get("cholesterol")) != null) ? Double.parseDouble(((JSONObject) labelNutrients.get("cholesterol")).get("value").toString()) : 0
-                        }
-                );
-                food.setDescription(foodResult);    // Sets food description
-                FoodObject.addFoodToList(food);     // Add food to daily consumed foods
-                FoodObject.addFoodId(fdcID);        // Add food id of daily consumed food
-                food.addNutrientsToList(food);      // Adds food's nutrients to daily foods
+            FoodObject food = new FoodObject(new double[] //These labels are all based on the order of the FoodObject attributes
+                    {
+                            (((JSONObject) labelNutrients.get("calories")) != null) ? Double.parseDouble(((JSONObject) labelNutrients.get("calories")).get("value").toString()) : 0,
+                            (((JSONObject) labelNutrients.get("fat")) != null) ? Double.parseDouble(((JSONObject) labelNutrients.get("fat")).get("value").toString()) : 0,
+                            (((JSONObject) labelNutrients.get("saturatedFat")) != null) ? Double.parseDouble(((JSONObject) labelNutrients.get("saturatedFat")).get("value").toString()) : 0,
+                            (((JSONObject) labelNutrients.get("transFat")) != null) ? Double.parseDouble(((JSONObject) labelNutrients.get("transFat")).get("value").toString()) : 0,
+                            (((JSONObject) labelNutrients.get("sodium")) != null) ? Double.parseDouble(((JSONObject) labelNutrients.get("sodium")).get("value").toString()) : 0,
+                            (((JSONObject) labelNutrients.get("fiber")) != null) ? Double.parseDouble(((JSONObject) labelNutrients.get("fiber")).get("value").toString()) : 0,
+                            (((JSONObject) labelNutrients.get("carbohydrates")) != null) ? Double.parseDouble((((JSONObject) labelNutrients.get("carbohydrates")).get("value")).toString()) : 0,
+                            (((JSONObject) labelNutrients.get("sugars")) != null) ? Double.parseDouble(((JSONObject) labelNutrients.get("sugars")).get("value").toString()) : 0,
+                            (((JSONObject) labelNutrients.get("protein")) != null) ? Double.parseDouble(((JSONObject) labelNutrients.get("protein")).get("value").toString()) : 0,
+                            (((JSONObject) labelNutrients.get("cholesterol")) != null) ? Double.parseDouble(((JSONObject) labelNutrients.get("cholesterol")).get("value").toString()) : 0
+                    }
+            );
+            food.setDescription(foodResult);    // Sets food description
+            FoodObject.addFoodToList(food);     // Add food to daily consumed foods
+            FoodObject.addFoodId(fdcID);        // Add food id of daily consumed food
+            food.addNutrientsToList(food);      // Adds food's nutrients to daily foods
 
-                System.out.println(food); // Prints FoodObject label contents to the terminal window
+            System.out.println(food); // Prints FoodObject label contents to the terminal window
 
-        }else{
-        // If "labelNutrients" is empty (null), use foodNutrients for FoodObject
+        } else {
+            // If "labelNutrients" is empty (null), use foodNutrients for FoodObject
 
             System.out.println(" \u001b[93mWarning\u001b[0m → labelNutrients does not exist.\n \u001b[92mUpdate\u001b[0m → Creating one via foodNutrients..."); // Notifying us about the nutrition facts
 
@@ -177,40 +177,50 @@ public class FoodData {
             JSONObject entry;
             double[] foodNutrientsArray = new double[10];
 
-            for(int i = 0; i < foodNutrients.size(); i++){
+            for (int i = 0; i < foodNutrients.size(); i++) {
 
                 entry = (JSONObject) foodNutrients.get(i);
                 // Selects from the foodNutrients JsonArray the needed nutrients based off their corresponding id
-                switch ( Integer.parseInt(((JSONObject) entry.get("nutrient")).get("id").toString())){
+                switch (Integer.parseInt(((JSONObject) entry.get("nutrient")).get("id").toString())) {
 
-                    case 1008: foodNutrientsArray[0] = Double.parseDouble(entry.get("amount").toString());// calories
+                    case 1008:
+                        foodNutrientsArray[0] = Double.parseDouble(entry.get("amount").toString());// calories
                         break;
 
-                    case 1004: foodNutrientsArray[1] = Double.parseDouble(entry.get("amount").toString());// fats
+                    case 1004:
+                        foodNutrientsArray[1] = Double.parseDouble(entry.get("amount").toString());// fats
                         break;
 
-                    case 1258: foodNutrientsArray[2] = Double.parseDouble(entry.get("amount").toString());// saturatedFats
+                    case 1258:
+                        foodNutrientsArray[2] = Double.parseDouble(entry.get("amount").toString());// saturatedFats
                         break;
 
-                    case 1257: foodNutrientsArray[3] = Double.parseDouble(entry.get("amount").toString());// transFat
+                    case 1257:
+                        foodNutrientsArray[3] = Double.parseDouble(entry.get("amount").toString());// transFat
                         break;
 
-                    case 1093: foodNutrientsArray[4] = Double.parseDouble(entry.get("amount").toString());// sodium
+                    case 1093:
+                        foodNutrientsArray[4] = Double.parseDouble(entry.get("amount").toString());// sodium
                         break;
 
-                    case 1079: foodNutrientsArray[5] = Double.parseDouble(entry.get("amount").toString());// fiber
+                    case 1079:
+                        foodNutrientsArray[5] = Double.parseDouble(entry.get("amount").toString());// fiber
                         break;
 
-                    case 1005: foodNutrientsArray[6] = Double.parseDouble(entry.get("amount").toString());// carbs
+                    case 1005:
+                        foodNutrientsArray[6] = Double.parseDouble(entry.get("amount").toString());// carbs
                         break;
 
-                    case 2000: foodNutrientsArray[7] = Double.parseDouble(entry.get("amount").toString());// sugars
+                    case 2000:
+                        foodNutrientsArray[7] = Double.parseDouble(entry.get("amount").toString());// sugars
                         break;
 
-                    case 1003: foodNutrientsArray[8] = Double.parseDouble(entry.get("amount").toString());// protein
+                    case 1003:
+                        foodNutrientsArray[8] = Double.parseDouble(entry.get("amount").toString());// protein
                         break;
 
-                    case 1253: foodNutrientsArray[9] = Double.parseDouble(entry.get("amount").toString());// cholesterol
+                    case 1253:
+                        foodNutrientsArray[9] = Double.parseDouble(entry.get("amount").toString());// cholesterol
                         break;
 
                 }
@@ -226,70 +236,72 @@ public class FoodData {
         }
 
         // Prints List of added/consumed foods & nutrients to terminal window
-        for(int i = 0; i < FoodObject.dailyFood.size(); i++){
-            System.out.println((i+1) + ": " + FoodObject.dailyFood.get(i));
+        for (int i = 0; i < FoodObject.dailyFood.size(); i++) {
+            System.out.println((i + 1) + ": " + FoodObject.dailyFood.get(i));
         }
 
-        System.out.println(("▬").repeat(10) + "\ncalories: "+ FoodObject.dailyNutrients[0] + "\nfats: " + FoodObject.dailyNutrients[1] + "\nsaturatedFats: "+ FoodObject.dailyNutrients[2] + "\ntransFat: " + FoodObject.dailyNutrients[3] +
-                "\nsodium: "+ FoodObject.dailyNutrients[4] + "\nfiber: " + FoodObject.dailyNutrients[5] + "\ncarbs: "+ FoodObject.dailyNutrients[6] + "\nsugars: " + FoodObject.dailyNutrients[7] +
-                "\nprotein: "+ FoodObject.dailyNutrients[8] + "\ncholesterol: " + FoodObject.dailyNutrients[9] + "\n"+ ("▬").repeat(10));
-
-
-
-
+        System.out.println(("▬").repeat(10) + "\ncalories: " + FoodObject.dailyNutrients[0] + "\nfats: " + FoodObject.dailyNutrients[1] + "\nsaturatedFats: " + FoodObject.dailyNutrients[2] + "\ntransFat: " + FoodObject.dailyNutrients[3] +
+                "\nsodium: " + FoodObject.dailyNutrients[4] + "\nfiber: " + FoodObject.dailyNutrients[5] + "\ncarbs: " + FoodObject.dailyNutrients[6] + "\nsugars: " + FoodObject.dailyNutrients[7] +
+                "\nprotein: " + FoodObject.dailyNutrients[8] + "\ncholesterol: " + FoodObject.dailyNutrients[9] + "\n" + ("▬").repeat(10));
 
 
     }
 
-    public static String makeSearchURL(String foodName, boolean isBranded, String brandOwner){
+    public static String makeSearchURL(String foodName, boolean isBranded, String brandOwner) {
         String url = "";
         String dataType = "";
         String[] food = foodName.split(" ");
         String tempFood = "";
 
-        if(!isBranded){
+        if (!isBranded) {
             // General Search
 
             // Parse foodName to be query
-            for(int i = 0; i < food.length; i++){
-                if(food[i].isEmpty()){continue;}
+            for (int i = 0; i < food.length; i++) {
+                if (food[i].isEmpty()) {
+                    continue;
+                }
 
-                if(i == food.length - 1){
+                if (i == food.length - 1) {
                     tempFood += food[i];
-                }else{
+                } else {
                     tempFood += food[i] + "%20";
                 }
             }
             foodName = tempFood;
             dataType = "Survey%20%28FNDDS%29"; // "Survey (FNDDS)"
 
-            url = "https://api.nal.usda.gov/fdc/v1/foods/search?api_key="+API_KEY+"&query="+foodName+"&dataType="+dataType+"&pageSize="+pageSize+"&pageNumber="+pageNumber;
+            url = "https://api.nal.usda.gov/fdc/v1/foods/search?api_key=" + API_KEY + "&query=" + foodName + "&dataType=" + dataType + "&pageSize=" + pageSize + "&pageNumber=" + pageNumber;
             System.out.println(url);
             return url;
 
-        }else{
+        } else {
             // Search for brand
             String[] brand = brandOwner.split(" ");
             String tempBrand = "";
 
             // Parse foodName to be query
-            for(int i = 0; i < food.length; i++){
-                if(food[i].isEmpty()){continue;}
+            for (int i = 0; i < food.length; i++) {
+                if (food[i].isEmpty()) {
+                    continue;
+                }
 
-                if(i == food.length - 1){
+                if (i == food.length - 1) {
                     tempFood += food[i];
-                }else{
+                } else {
                     tempFood += food[i] + "%20";
                 }
             }
 
             // Parse brandName to be query
-            for(int i = 0; i < brand.length; i++){
-                if(brand[i].isEmpty()){continue;}
+            for (int i = 0; i < brand.length; i++) {
+                if (brand[i].isEmpty()) {
+                    continue;
+                }
 
-                if(i == brand.length - 1){
+                if (i == brand.length - 1) {
                     tempBrand += brand[i];
-                }else{
+                } else {
                     tempBrand += brand[i] + "%20";
                 }
             }
@@ -297,7 +309,7 @@ public class FoodData {
             brandOwner = tempBrand;
             dataType = "Branded";
 
-            url = "https://api.nal.usda.gov/fdc/v1/foods/search?api_key="+API_KEY+"&query="+foodName+"&dataType="+dataType+"&pageSize="+pageSize+"&pageNumber="+pageNumber+"&brandOwner="+brandOwner;
+            url = "https://api.nal.usda.gov/fdc/v1/foods/search?api_key=" + API_KEY + "&query=" + foodName + "&dataType=" + dataType + "&pageSize=" + pageSize + "&pageNumber=" + pageNumber + "&brandOwner=" + brandOwner;
 
             // Print URL (Debugging - Remove Later)
             System.out.println(url);
@@ -307,8 +319,8 @@ public class FoodData {
 
     }
 
-    public static void getNutrition(int fdcID){
-        try{
+    public static void getNutrition(int fdcID) {
+        try {
             String data;
             URL url = new URL("https://api.nal.usda.gov/fdc/v1/food/" + fdcID + "?api_key=" + API_KEY);
 
@@ -342,7 +354,7 @@ public class FoodData {
 
             }
 
-        }catch(Exception e){
+        } catch (Exception e) {
             // Generic exception handling put more specific catch blocks above
             System.out.println("Error: " + e.getMessage());
 
@@ -350,15 +362,15 @@ public class FoodData {
         }
     }
 
-    public static void removeNutrition(JSONObject data){
+    public static void removeNutrition(JSONObject data) {
 
         // Parse JSONObject data and add nutritional facts to new FoodObject
         JSONObject labelNutrients = (JSONObject) data.get("labelNutrients"); //We create a JSONObject for labels by default it is null if it cannot be initialized
 
         // Label is provided in search
-        if(labelNutrients != null){
+        if (labelNutrients != null) {
 
-            FoodObject tempFood = new FoodObject( new double[] //These labels are all based on the order of the FoodObject attributes
+            FoodObject tempFood = new FoodObject(new double[] //These labels are all based on the order of the FoodObject attributes
                     {
                             (((JSONObject) labelNutrients.get("calories")) != null) ? Double.parseDouble(((JSONObject) labelNutrients.get("calories")).get("value").toString()) : 0,
                             (((JSONObject) labelNutrients.get("fat")) != null) ? Double.parseDouble(((JSONObject) labelNutrients.get("fat")).get("value").toString()) : 0,
@@ -375,7 +387,7 @@ public class FoodData {
 
             tempFood.removeNutrientsFromList(tempFood); // Removes food nutrients from daily list
 
-        }else{
+        } else {
 
             // If "labelNutrients" is empty (null), use foodNutrients for FoodObject
 
@@ -386,40 +398,50 @@ public class FoodData {
             JSONObject entry;
             double[] foodNutrientsArray = new double[10];
 
-            for(int i = 0; i < foodNutrients.size(); i++){
+            for (int i = 0; i < foodNutrients.size(); i++) {
 
                 entry = (JSONObject) foodNutrients.get(i);
                 // Selects from the foodNutrients JsonArray the needed nutrients based off their corresponding id
-                switch ( Integer.parseInt(((JSONObject) entry.get("nutrient")).get("id").toString())){
+                switch (Integer.parseInt(((JSONObject) entry.get("nutrient")).get("id").toString())) {
 
-                    case 1008: foodNutrientsArray[0] = Double.parseDouble(entry.get("amount").toString());// calories
+                    case 1008:
+                        foodNutrientsArray[0] = Double.parseDouble(entry.get("amount").toString());// calories
                         break;
 
-                    case 1004: foodNutrientsArray[1] = Double.parseDouble(entry.get("amount").toString());// fats
+                    case 1004:
+                        foodNutrientsArray[1] = Double.parseDouble(entry.get("amount").toString());// fats
                         break;
 
-                    case 1258: foodNutrientsArray[2] = Double.parseDouble(entry.get("amount").toString());// saturatedFats
+                    case 1258:
+                        foodNutrientsArray[2] = Double.parseDouble(entry.get("amount").toString());// saturatedFats
                         break;
 
-                    case 1257: foodNutrientsArray[3] = Double.parseDouble(entry.get("amount").toString());// transFat
+                    case 1257:
+                        foodNutrientsArray[3] = Double.parseDouble(entry.get("amount").toString());// transFat
                         break;
 
-                    case 1093: foodNutrientsArray[4] = Double.parseDouble(entry.get("amount").toString());// sodium
+                    case 1093:
+                        foodNutrientsArray[4] = Double.parseDouble(entry.get("amount").toString());// sodium
                         break;
 
-                    case 1079: foodNutrientsArray[5] = Double.parseDouble(entry.get("amount").toString());// fiber
+                    case 1079:
+                        foodNutrientsArray[5] = Double.parseDouble(entry.get("amount").toString());// fiber
                         break;
 
-                    case 1005: foodNutrientsArray[6] = Double.parseDouble(entry.get("amount").toString());// carbs
+                    case 1005:
+                        foodNutrientsArray[6] = Double.parseDouble(entry.get("amount").toString());// carbs
                         break;
 
-                    case 2000: foodNutrientsArray[7] = Double.parseDouble(entry.get("amount").toString());// sugars
+                    case 2000:
+                        foodNutrientsArray[7] = Double.parseDouble(entry.get("amount").toString());// sugars
                         break;
 
-                    case 1003: foodNutrientsArray[8] = Double.parseDouble(entry.get("amount").toString());// protein
+                    case 1003:
+                        foodNutrientsArray[8] = Double.parseDouble(entry.get("amount").toString());// protein
                         break;
 
-                    case 1253: foodNutrientsArray[9] = Double.parseDouble(entry.get("amount").toString());// cholesterol
+                    case 1253:
+                        foodNutrientsArray[9] = Double.parseDouble(entry.get("amount").toString());// cholesterol
                         break;
 
                 }
@@ -430,10 +452,9 @@ public class FoodData {
         }
 
         System.out.println("\u001b[92mUpdate\u001b[0m → Removing nutritional data..."); // Update on nutritional data removal
-        System.out.println(("▬").repeat(10) + "\ncalories: "+ FoodObject.dailyNutrients[0] + "\nfats: " + FoodObject.dailyNutrients[1] + "\nsaturatedFats: "+ FoodObject.dailyNutrients[2] + "\ntransFat: " + FoodObject.dailyNutrients[3] +
-                "\nsodium: "+ FoodObject.dailyNutrients[4] + "\nfiber: " + FoodObject.dailyNutrients[5] + "\ncarbs: "+ FoodObject.dailyNutrients[6] + "\nsugars: " + FoodObject.dailyNutrients[7] +
-                "\nprotein: "+ FoodObject.dailyNutrients[8] + "\ncholesterol: " + FoodObject.dailyNutrients[9] + "\n"+ ("▬").repeat(10));
-
+        System.out.println(("▬").repeat(10) + "\ncalories: " + FoodObject.dailyNutrients[0] + "\nfats: " + FoodObject.dailyNutrients[1] + "\nsaturatedFats: " + FoodObject.dailyNutrients[2] + "\ntransFat: " + FoodObject.dailyNutrients[3] +
+                "\nsodium: " + FoodObject.dailyNutrients[4] + "\nfiber: " + FoodObject.dailyNutrients[5] + "\ncarbs: " + FoodObject.dailyNutrients[6] + "\nsugars: " + FoodObject.dailyNutrients[7] +
+                "\nprotein: " + FoodObject.dailyNutrients[8] + "\ncholesterol: " + FoodObject.dailyNutrients[9] + "\n" + ("▬").repeat(10));
 
 
     }

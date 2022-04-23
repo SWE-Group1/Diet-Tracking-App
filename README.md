@@ -5,23 +5,28 @@
 	</p>
 </h3>
 
-#### Synopsis 
+#### Synopsis
+
 ___
+
 #### The app will...
+
 * track/monitor a user’s dietary plan.
 * provide search, history, and summary sections.
 
 #### Team
+
 ___
+
 * Isaac Alao
-   * `Programmer` `UI/UX Designer` `Documenter`
+    * `Programmer` `UI/UX Designer` `Documenter`
 * Christopher Dargan
-   * `Programmer` `UI/UX Designer`
+    * `Programmer` `UI/UX Designer`
 * Remy Akins
-   * `Tester` `Respondent`
+    * `Tester` `Respondent`
 * Munir Abdulkair
-   * `Programmer`
+    * `Programmer`
 * Siham Abdulwahab
-   * `Programmer`
+    * `Programmer`
 * Kayla Brooks
-   * `Programmer`
+    * `Programmer`

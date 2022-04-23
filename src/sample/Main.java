@@ -9,7 +9,7 @@ import javafx.stage.Stage;
 public class Main extends Application {
 
     @Override
-    public void start(Stage primaryStage) throws Exception{
+    public void start(Stage primaryStage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("SearchScene.fxml"));
         primaryStage.setTitle("Diet Tracking App");
         primaryStage.setScene(new Scene(root, 1000, 700));
@@ -29,7 +29,7 @@ public class Main extends Application {
     }
 
     @Override
-    public void stop(){
+    public void stop() {
         System.out.println("Stage is closing, Saving food history to FoodHistoryLog");
 
         // Save FoodHistoryLog

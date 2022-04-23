@@ -32,34 +32,36 @@ public class SceneController {
     private static double height;
 
     public void switchToSearchScene(ActionEvent event) throws IOException {
-         setSceneDimensions();
-         sceneNum = 1;
-         root = FXMLLoader.load(getClass().getResource("SearchScene.fxml"));
-         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-         scene = new Scene(root,width,height);
-         stage.setScene(scene);
-         stage.show();
+        setSceneDimensions();
+        sceneNum = 1;
+        root = FXMLLoader.load(getClass().getResource("SearchScene.fxml"));
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root, width, height);
+        stage.setScene(scene);
+        stage.show();
 
-         setSceneDetails(scene);
+        setSceneDetails(scene);
     }
+
     public void switchToHistoryScene(ActionEvent event) throws IOException {
         setSceneDimensions();
         sceneNum = 2;
         root = FXMLLoader.load(getClass().getResource("HistoryScene.fxml"));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root,width,height);
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root, width, height);
         stage.setScene(scene);
         stage.show();
 
         setSceneDetails(scene);
 
     }
+
     public void switchToSummaryScene(ActionEvent event) throws IOException {
         setSceneDimensions();
         sceneNum = 3;
         root = FXMLLoader.load(getClass().getResource("SummaryScene.fxml"));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root,width,height);
+        stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        scene = new Scene(root, width, height);
         stage.setScene(scene);
         stage.show();
 
@@ -68,11 +70,14 @@ public class SceneController {
         // Set Summary Values
     }
 
-    public void setSceneDimensions(){
+    public void setSceneDimensions() {
         width = window.getWidth();
         height = window.getHeight();
     }
-    public static void setSceneDetails(Scene currentScene){window = currentScene;}
+
+    public static void setSceneDetails(Scene currentScene) {
+        window = currentScene;
+    }
 
 
     //==========================================================================
@@ -81,54 +86,66 @@ public class SceneController {
     // SEARCH SCENE VARIABLES & METHODS ========================================
 
     // Display Search Results
-    @FXML TableView<SearchObject> tableList;
+    @FXML
+    TableView<SearchObject> tableList;
 
-    @FXML TableColumn<SearchObject, String> FoodNameCol;
-    @FXML TableColumn<SearchObject, Integer> FDCID;
-    @FXML TableColumn<SearchObject, String> BrandOwner;
-    @FXML TableColumn<SearchObject, String> DataType;
-    @FXML TableColumn<SearchObject, String> ServingSize;
+    @FXML
+    TableColumn<SearchObject, String> FoodNameCol;
+    @FXML
+    TableColumn<SearchObject, Integer> FDCID;
+    @FXML
+    TableColumn<SearchObject, String> BrandOwner;
+    @FXML
+    TableColumn<SearchObject, String> DataType;
+    @FXML
+    TableColumn<SearchObject, String> ServingSize;
 
     // Searching Objects
-    @FXML AnchorPane headerAnchor;
-    @FXML TextField searchTextFieldFood;
-    @FXML TextField searchTextFieldBrand;
-    @FXML JFXButton searchButton;
-    @FXML ImageView searchButtonIcon;
-    @FXML JFXButton addButton;
+    @FXML
+    AnchorPane headerAnchor;
+    @FXML
+    TextField searchTextFieldFood;
+    @FXML
+    TextField searchTextFieldBrand;
+    @FXML
+    JFXButton searchButton;
+    @FXML
+    ImageView searchButtonIcon;
+    @FXML
+    JFXButton addButton;
 
     String food, brand = "";
     boolean isBranded = false;
     int page = 1;
 
-    public void searchFood(){
+    public void searchFood() {
         //FoodData.searchFood("Mango",false,"",1);
 
         // Checking if food textField is empty
-        if(!searchTextFieldFood.getText().isEmpty()) {
+        if (!searchTextFieldFood.getText().isEmpty()) {
             food = searchTextFieldFood.getText();
             brand = "";
             isBranded = false;
-        }else {
+        } else {
             return;
         }
 
 
         // Checking if a brand was entered
-        if(!searchTextFieldBrand.getText().isEmpty()){
+        if (!searchTextFieldBrand.getText().isEmpty()) {
             brand = searchTextFieldBrand.getText();
             isBranded = true;
-        }else{
+        } else {
             brand = "";
             isBranded = false;
         }
 
-        FoodData.searchFood(food,isBranded,brand,page);
+        FoodData.searchFood(food, isBranded, brand, page);
         displaySearchResults();
     }
 
-    public void displaySearchResults(){
-        if(!FoodData.searchResult.isEmpty()){
+    public void displaySearchResults() {
+        if (!FoodData.searchResult.isEmpty()) {
             FoodNameCol.setCellValueFactory(new PropertyValueFactory<SearchObject, String>("foodName"));
             FDCID.setCellValueFactory(new PropertyValueFactory<SearchObject, Integer>("fdcId"));
             BrandOwner.setCellValueFactory(new PropertyValueFactory<SearchObject, String>("brandOwner"));
@@ -141,7 +158,7 @@ public class SceneController {
             displaySearchList.addAll(FoodData.searchResult);
             tableList.setItems(displaySearchList);
 
-        }else{
+        } else {
             // Display in a label -> "No results found"
             tableList.getItems().clear();
             tableList.setPlaceholder(new Label("No Results Found"));
@@ -160,31 +177,38 @@ public class SceneController {
             //Make sure to implement a condition that prevents the user from adding the same item twice.
             isBranded = (FoodData.searchResult.get(index).dataType != "Survey (FNDDS)");
 
-            FoodData.getNutrition(fdcID,isBranded,FoodData.searchResult.get(index));    // Creates FoodObject and adds to daily consumption
-        } catch (Exception e) {System.out.println(" \u001b[91mError\u001b[0m → \u001b[91mUser did not select a food item to add to the list!\u001b[0m");} // Error msg
+            FoodData.getNutrition(fdcID, isBranded, FoodData.searchResult.get(index));    // Creates FoodObject and adds to daily consumption
+        } catch (Exception e) {
+            System.out.println(" \u001b[91mError\u001b[0m → \u001b[91mUser did not select a food item to add to the list!\u001b[0m");
+        } // Error msg
     }
     //=================================================================
 
     // HISTORY SCENE VARIABLES ========================================
 
-    @FXML DatePicker datePicker;
-    @FXML JFXButton searchFoodHistoryButton;
-    @FXML Label historyLabel;
-    @FXML JFXListView<String> historyFoodList;
-    @FXML JFXButton removeButton;
+    @FXML
+    DatePicker datePicker;
+    @FXML
+    JFXButton searchFoodHistoryButton;
+    @FXML
+    Label historyLabel;
+    @FXML
+    JFXListView<String> historyFoodList;
+    @FXML
+    JFXButton removeButton;
 
-    public void searchFoodHistory(){
+    public void searchFoodHistory() {
 
-        if(datePicker.getValue() == null){
+        if (datePicker.getValue() == null) {
             historyLabel.setText("Select a date before searching");
             return;
         }
 
         String date = datePicker.getValue().toString();
 
-        String month = date.substring(5,7);
-        String day = date.substring(8,10);
-        String year = date.substring(0,4);
+        String month = date.substring(5, 7);
+        String day = date.substring(8, 10);
+        String year = date.substring(0, 4);
 
         String key = month + '-' + day + '-' + year;
 
@@ -193,19 +217,19 @@ public class SceneController {
         removeButton.setVisible(false);
 
         // Search For Current Day Food
-        if(key.equals(Log.getDate())){
+        if (key.equals(Log.getDate())) {
 
-            if(!FoodObject.dailyFood.isEmpty()){
+            if (!FoodObject.dailyFood.isEmpty()) {
 
-                for(int i = 0; i < FoodObject.dailyFood.size(); i++){
-                    historyFoodList.getItems().add((i+1) + ": " + FoodObject.dailyFood.get(i));
+                for (int i = 0; i < FoodObject.dailyFood.size(); i++) {
+                    historyFoodList.getItems().add((i + 1) + ": " + FoodObject.dailyFood.get(i));
                 }
 
                 historyLabel.setText("Food History Log : " + key);
                 removeButton.setVisible(true);
                 return;
 
-            }else{
+            } else {
                 // Daily Foods consumed is empty
                 historyLabel.setText("No food history yet today (" + key + "). Search and add food");
                 return;
@@ -213,23 +237,23 @@ public class SceneController {
         }
 
         // Search For Past Food History
-        if(foodHistoryLog != null){
+        if (foodHistoryLog != null) {
 
             JSONArray foods = (JSONArray) foodHistoryLog.get("foods");
 
-            if(!foods.isEmpty()){
+            if (!foods.isEmpty()) {
 
-                for(int i = 0; i < foods.size(); i++){
-                    historyFoodList.getItems().add((i+1) + ": " + foods.get(i).toString());
+                for (int i = 0; i < foods.size(); i++) {
+                    historyFoodList.getItems().add((i + 1) + ": " + foods.get(i).toString());
                 }
                 historyLabel.setText("Food History Log : " + key);
 
-            }else{
+            } else {
                 // Valid foodHistoryLog JSONObject but no foods listed in the foods array
                 historyLabel.setText("No food history log for the day: " + key);
             }
 
-        }else{
+        } else {
             // Null if no foodHistoryLog JSONObject was found
             historyLabel.setText("No food history log for the day: " + key);
         }
@@ -238,10 +262,10 @@ public class SceneController {
     }
 
     // Only removes food from the current day not days from the past
-    public void removeFood(){
+    public void removeFood() {
 
         // Clicked remove but haven't selected a food
-        if(historyFoodList.getSelectionModel().isEmpty()){
+        if (historyFoodList.getSelectionModel().isEmpty()) {
             historyLabel.setText("Select a food from the list before removing");
             return;
         }
@@ -261,16 +285,16 @@ public class SceneController {
         historyFoodList.getItems().clear();
         removeButton.setVisible(false);
 
-        if(!FoodObject.dailyFood.isEmpty()){
+        if (!FoodObject.dailyFood.isEmpty()) {
 
-            for(int i = 0; i < FoodObject.dailyFood.size(); i++){
-                historyFoodList.getItems().add((i+1) + ": " + FoodObject.dailyFood.get(i));
+            for (int i = 0; i < FoodObject.dailyFood.size(); i++) {
+                historyFoodList.getItems().add((i + 1) + ": " + FoodObject.dailyFood.get(i));
             }
 
             removeButton.setVisible(true);
             return;
 
-        }else{
+        } else {
             // Daily Foods consumed is empty
             historyLabel.setText("");
             return;
@@ -284,37 +308,58 @@ public class SceneController {
 
     // Display Contents of FoodObject.dailyNutrients array on summary scene
 
-    @FXML ProgressBar caloriesBar;
-    @FXML ProgressBar fatsBar;
-    @FXML ProgressBar saturatedFatsBar;
-    @FXML ProgressBar transFatBar;
-    @FXML ProgressBar sodiumBar;
-    @FXML ProgressBar fiberBar;
-    @FXML ProgressBar carbsBar;
-    @FXML ProgressBar sugarsBar;
-    @FXML ProgressBar proteinBar;
-    @FXML ProgressBar cholesterolBar;
+    @FXML
+    ProgressBar caloriesBar;
+    @FXML
+    ProgressBar fatsBar;
+    @FXML
+    ProgressBar saturatedFatsBar;
+    @FXML
+    ProgressBar transFatBar;
+    @FXML
+    ProgressBar sodiumBar;
+    @FXML
+    ProgressBar fiberBar;
+    @FXML
+    ProgressBar carbsBar;
+    @FXML
+    ProgressBar sugarsBar;
+    @FXML
+    ProgressBar proteinBar;
+    @FXML
+    ProgressBar cholesterolBar;
 
-    @FXML Label caloriesLabel;
-    @FXML Label fatsLabel;
-    @FXML Label saturatedFatsLabel;
-    @FXML Label transFatsLabel;
-    @FXML Label sodiumLabel;
-    @FXML Label fiberLabel;
-    @FXML Label carbsLabel;
-    @FXML Label sugarsLabel;
-    @FXML Label proteinLabel;
-    @FXML Label cholesterolLabel;
+    @FXML
+    Label caloriesLabel;
+    @FXML
+    Label fatsLabel;
+    @FXML
+    Label saturatedFatsLabel;
+    @FXML
+    Label transFatsLabel;
+    @FXML
+    Label sodiumLabel;
+    @FXML
+    Label fiberLabel;
+    @FXML
+    Label carbsLabel;
+    @FXML
+    Label sugarsLabel;
+    @FXML
+    Label proteinLabel;
+    @FXML
+    Label cholesterolLabel;
 
-    @FXML Button test;
+    @FXML
+    Button test;
 
-    public  void testfunction(){
+    public void testfunction() {
         setSummaryValues();
     }
 
-    public void setSummaryValues(){
+    public void setSummaryValues() {
 
-        caloriesBar.setProgress(FoodObject.dailyNutrients[0]/2500);
+        caloriesBar.setProgress(FoodObject.dailyNutrients[0] / 2500);
         caloriesLabel.setText(String.valueOf(FoodObject.dailyNutrients[0]));
 
         fatsBar.setProgress(FoodObject.dailyNutrients[1] / 80);
@@ -338,15 +383,12 @@ public class SceneController {
         sugarsBar.setProgress(FoodObject.dailyNutrients[7] / 80);
         sugarsLabel.setText(String.valueOf(FoodObject.dailyNutrients[7]));
 
-        proteinBar.setProgress(FoodObject.dailyNutrients[8]/100);
+        proteinBar.setProgress(FoodObject.dailyNutrients[8] / 100);
         proteinLabel.setText(String.valueOf(FoodObject.dailyNutrients[8]));
 
-        cholesterolBar.setProgress(FoodObject.dailyNutrients[9]/400);
+        cholesterolBar.setProgress(FoodObject.dailyNutrients[9] / 400);
         cholesterolLabel.setText(String.valueOf(FoodObject.dailyNutrients[9]));
     }
-
-
-
 
 
     //================================================================
