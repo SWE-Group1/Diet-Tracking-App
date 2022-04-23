@@ -8,118 +8,88 @@ import java.util.ArrayList;
 
 public class FoodObject {
     // Added Foods are stored in this arrayList (Only stores daily consumption)
-    public static ArrayList<FoodObject> addedFood = new ArrayList<>();
+    public static ArrayList<String> dailyFood = new ArrayList<>();
+    public static ArrayList<Integer> dailyFoodIds = new ArrayList<>();
+    public static double[] dailyNutrients = new double[10];
 
     // FoodObject Description
     public String foodName;
     public int fdcId;
     public String dataType;
     public String brandOwner;
-    public int servingSize;
+    public double servingSize;
 
     // FoodObject LabelNutrients
-    public double calories = 0;
-    public double fats = 0;
-    public double saturatedFats = 0;
-    public double transFat = 0;
-    public double sodium = 0;
-    public double fiber = 0;
-    public double carbs = 0;
-    public double sugars = 0;
-    public double protein = 0;
-    public double potassium = 0;
+    public double calories = 0;         // id = 1008    unit = kcal    max = 2500 kcal
+    public double fats = 0;             // id = 1004    unit = g       max = 100g
+    public double saturatedFats = 0;    // id = 1258    unit = g       max = 20g
+    public double transFat = 0;         // id = 1257    unit = g       max = 3g
+    public double sodium = 0;           // id = 1093    unit = mg      max = 2500mg
+    public double fiber = 0;            // id = 1079    unit = g       max = 80
+    public double carbs = 0;            // id = 1005    unit = g       max = 500g
+    public double sugars = 0;           // id = 2000    unit = g       max = 80g
+    public double protein = 0;          // id = 1003    unit = g       max = 100g
+    public double cholesterol = 0;      // id = 1253    unit = mg      max = 400mg
 
-    public FoodObject(double calories, double fats, double saturatedFats, double transFat, double sodium)
+    public FoodObject(double[] labelNutrients)
     {
-
-    }
-    public FoodObject(JSONObject label){
-
-        // Temp JsonObject to hold Objects
-        JSONObject fact;
-
-        // Fats
-        if(label.get("fat") != null){
-            fact = (JSONObject) label.get("fat");
-            fats = Double.parseDouble(String.valueOf(fact.get("value")));
-        }
-        // Saturated Fats
-        if(label.get("saturatedFat") != null){
-            fact = (JSONObject) label.get("saturatedFat");
-            saturatedFats = Double.parseDouble(String.valueOf(fact.get("value")));
-        }
-        // Trans Fats
-        if(label.get("transFat") != null){
-            fact = (JSONObject) label.get("transFat");
-            transFat = Double.parseDouble(String.valueOf(fact.get("value")));
-        }
-        // Sodium
-        if(label.get("sodium") != null){
-            fact = (JSONObject) label.get("sodium");
-            sodium = Double.parseDouble(String.valueOf(fact.get("value")));
-        }
-        // Carbohydrates
-        if(label.get("carbohydrates") != null){
-            fact = (JSONObject) label.get("carbohydrates");
-            carbs = Double.parseDouble(String.valueOf(fact.get("value")));
-        }
-        // Fiber
-        if(label.get("fiber") != null){
-            fact = (JSONObject) label.get("fiber");
-            fiber = Double.parseDouble(String.valueOf(fact.get("value")));
-        }
-        // Sugar
-        if(label.get("sugars") != null){
-            fact = (JSONObject) label.get("sugars");
-            sugars = Double.parseDouble(String.valueOf(fact.get("value")));
-        }
-        // Protein
-        if(label.get("protein") != null){
-            fact = (JSONObject) label.get("protein");
-            protein = Double.parseDouble(String.valueOf(fact.get("value")));
-        }
-        // Potassium
-        if(label.get("potassium") != null){
-            fact = (JSONObject) label.get("potassium");
-            potassium = Double.parseDouble(String.valueOf(fact.get("value")));
-        }
-        // Calories
-        if(label.get("calories") != null){
-            fact = (JSONObject) label.get("calories");
-            calories = Double.parseDouble(String.valueOf(fact.get("value")));
-        }
+        calories = labelNutrients[0]; fats = labelNutrients[1]; saturatedFats = labelNutrients[2];
+        transFat = labelNutrients[3]; sodium = labelNutrients[4]; fiber = labelNutrients[5];
+        carbs = labelNutrients[6]; sugars = labelNutrients[7]; protein = labelNutrients[8];
+        cholesterol = labelNutrients[9];
 
     }
 
     public static void addFoodToList(FoodObject food){
-        addedFood.add(food);
+        dailyFood.add(food.foodName);
+    }
+    public static void addFoodId(int id){dailyFoodIds.add(id);}
+
+    public static void removeFoodFromList(int index){dailyFood.remove(index);}
+
+    public void addNutrientsToList(FoodObject food){
+        dailyNutrients[0] += Math.round(food.calories * 10) / 10;
+        dailyNutrients[1] += Math.round(food.fats * 10) / 10;
+        dailyNutrients[2] += Math.round(food.saturatedFats * 10) / 10;
+        dailyNutrients[3] += Math.round(food.transFat * 10) / 10;
+        dailyNutrients[4] += Math.round(food.sodium * 10) / 10;
+        dailyNutrients[5] += Math.round(food.fiber * 10) / 10;
+        dailyNutrients[6] += Math.round(food.carbs * 10) / 10;
+        dailyNutrients[7] += Math.round(food.sugars * 10) / 10;
+        dailyNutrients[8] += Math.round(food.protein * 10) / 10;
+        dailyNutrients[9] += Math.round(food.cholesterol * 10) / 10;
+    }
+
+    public void removeNutrientsFromList(FoodObject food){
+        dailyNutrients[0] -= Math.round(food.calories * 10) / 10;
+        dailyNutrients[1] -= Math.round(food.fats * 10) / 10;
+        dailyNutrients[2] -= Math.round(food.saturatedFats * 10) / 10;
+        dailyNutrients[3] -= Math.round(food.transFat * 10) / 10;
+        dailyNutrients[4] -= Math.round(food.sodium * 10) / 10;
+        dailyNutrients[5] -= Math.round(food.fiber * 10) / 10;
+        dailyNutrients[6] -= Math.round(food.carbs * 10) / 10;
+        dailyNutrients[7] -= Math.round(food.sugars * 10) / 10;
+        dailyNutrients[8] -= Math.round(food.protein * 10) / 10;
+        dailyNutrients[9] -= Math.round(food.cholesterol * 10) / 10;
+
     }
 
     @Override
-    public String toString(){
-        return "calories: "+ calories + " fats: " + fats + " saturatedFats: "+ saturatedFats + " transFat: " + transFat +
-                "sodium: "+ sodium + " fiber: " + fiber + " carbs: "+ carbs + " sugars: " + sugars + " protein: "+ protein + " potassium: " + potassium;
-    }
-    /*
-    public FoodObject(JSONArray entry) {
-        JSONArray test;
+    public String toString() {
+        return ("▬").repeat(10) + "\ncalories: "+ calories + "\nfats: " + fats + "\nsaturatedFats: "+ saturatedFats + "\ntransFat: " + transFat +
+                "\nsodium: "+ sodium + "\nfiber: " + fiber + "\ncarbs: "+ carbs + "\nsugars: " + sugars + "\nprotein: "+ protein + "\ncholesterol: " + cholesterol +
+                "\n"+ ("▬").repeat(10);
     }
 
-    public FoodObject(JSONObject entry){
-        JSONObject fact = new JSONObject();
-
-        if(entry.get("fat") != null){
-
-            fact.get("fat");
-            fact.get("value");
-            fats = Integer.parseInt(String.valueOf(fact.get("value")));
-
-            System.out.println("Fats: " + fats);
-        }
-
+    public void setDescription(SearchObject food){
+        foodName = food.getFoodName();
+        fdcId = food.getFdcId();
+        dataType = food.getDataType();
+        brandOwner = food.getBrandOwner();
+        servingSize = food.getServingSize();
     }
 
-     */
+
 
 
 
