@@ -1,7 +1,7 @@
 <h3>
 	<p align="center"> Diet Tracking App 🍇</p>
 	<p align="center">
-	<img src="https://img.shields.io/badge/READY-✔-green">
+	<img src="https://img.shields.io/badge/READ-✔-green">
 	</p>
 </h3>
 
