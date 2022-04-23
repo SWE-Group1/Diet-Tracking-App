@@ -1,6 +1,6 @@
 # Project exclude paths
 /out/
-D*
+/D*
 /.idea/
 /library/
-README.md
+/README.md
