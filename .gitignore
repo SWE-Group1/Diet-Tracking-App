@@ -1,7 +1,2 @@
+# Project exclude paths
 /out/
-/.idea/
-/library/
-/Diet-Tracking-App.iml
-/Diet\ Tracking\ App.iml
-/README.md
-/src/sample/FoodHistoryLog.json
