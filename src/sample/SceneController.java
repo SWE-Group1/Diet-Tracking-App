@@ -64,6 +64,8 @@ public class SceneController {
         stage.show();
 
         setSceneDetails(scene);
+
+        // Set Summary Values
     }
 
     public void setSceneDimensions(){
@@ -280,7 +282,70 @@ public class SceneController {
 
     // SUMMARY SCENE VARIABLES ========================================
 
-        // Display Contents of FoodObject.dailyNutrients array on summary scene
+    // Display Contents of FoodObject.dailyNutrients array on summary scene
+
+    @FXML ProgressBar caloriesBar;
+    @FXML ProgressBar fatsBar;
+    @FXML ProgressBar saturatedFatsBar;
+    @FXML ProgressBar transFatBar;
+    @FXML ProgressBar sodiumBar;
+    @FXML ProgressBar fiberBar;
+    @FXML ProgressBar carbsBar;
+    @FXML ProgressBar sugarsBar;
+    @FXML ProgressBar proteinBar;
+    @FXML ProgressBar cholesterolBar;
+
+    @FXML Label caloriesLabel;
+    @FXML Label fatsLabel;
+    @FXML Label saturatedFatsLabel;
+    @FXML Label transFatsLabel;
+    @FXML Label sodiumLabel;
+    @FXML Label fiberLabel;
+    @FXML Label carbsLabel;
+    @FXML Label sugarsLabel;
+    @FXML Label proteinLabel;
+    @FXML Label cholesterolLabel;
+
+    @FXML Button test;
+
+    public  void testfunction(){
+        setSummaryValues();
+    }
+
+    public void setSummaryValues(){
+
+        caloriesBar.setProgress(FoodObject.dailyNutrients[0]/2500);
+        caloriesLabel.setText(String.valueOf(FoodObject.dailyNutrients[0]));
+
+        fatsBar.setProgress(FoodObject.dailyNutrients[1] / 80);
+        fatsLabel.setText(String.valueOf(FoodObject.dailyNutrients[1]));
+
+        saturatedFatsBar.setProgress(FoodObject.dailyNutrients[2] / 20);
+        saturatedFatsLabel.setText(String.valueOf(FoodObject.dailyNutrients[2]));
+
+        transFatBar.setProgress(FoodObject.dailyNutrients[3] / 3);
+        transFatsLabel.setText(String.valueOf(FoodObject.dailyNutrients[3]));
+
+        sodiumBar.setProgress(FoodObject.dailyNutrients[4] / 2500 / 2500);
+        sodiumLabel.setText(String.valueOf(FoodObject.dailyNutrients[4]));
+
+        fiberBar.setProgress(FoodObject.dailyNutrients[5] / 80);
+        fiberLabel.setText(String.valueOf(FoodObject.dailyNutrients[5]));
+
+        carbsBar.setProgress(FoodObject.dailyNutrients[6] / 500);
+        carbsLabel.setText(String.valueOf(FoodObject.dailyNutrients[6]));
+
+        sugarsBar.setProgress(FoodObject.dailyNutrients[7] / 80);
+        sugarsLabel.setText(String.valueOf(FoodObject.dailyNutrients[7]));
+
+        proteinBar.setProgress(FoodObject.dailyNutrients[8]/100);
+        proteinLabel.setText(String.valueOf(FoodObject.dailyNutrients[8]));
+
+        cholesterolBar.setProgress(FoodObject.dailyNutrients[9]/400);
+        cholesterolLabel.setText(String.valueOf(FoodObject.dailyNutrients[9]));
+    }
+
+
 
 
 

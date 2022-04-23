@@ -20,16 +20,16 @@ public class FoodObject {
     public double servingSize;
 
     // FoodObject LabelNutrients
-    public double calories = 0;         // id = 1008
-    public double fats = 0;             // id = 1004
-    public double saturatedFats = 0;    // id = 1258
-    public double transFat = 0;         // id = 1257
-    public double sodium = 0;           // id = 1093
-    public double fiber = 0;            // id = 1079
-    public double carbs = 0;            // id = 1005
-    public double sugars = 0;           // id = 2000
-    public double protein = 0;          // id = 1003
-    public double cholesterol = 0;      // id = 1253
+    public double calories = 0;         // id = 1008    unit = kcal    max = 2500 kcal
+    public double fats = 0;             // id = 1004    unit = g       max = 100g
+    public double saturatedFats = 0;    // id = 1258    unit = g       max = 20g
+    public double transFat = 0;         // id = 1257    unit = g       max = 3g
+    public double sodium = 0;           // id = 1093    unit = mg      max = 2500mg
+    public double fiber = 0;            // id = 1079    unit = g       max = 80
+    public double carbs = 0;            // id = 1005    unit = g       max = 500g
+    public double sugars = 0;           // id = 2000    unit = g       max = 80g
+    public double protein = 0;          // id = 1003    unit = g       max = 100g
+    public double cholesterol = 0;      // id = 1253    unit = mg      max = 400mg
 
     public FoodObject(double[] labelNutrients)
     {
