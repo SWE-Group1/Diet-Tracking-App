@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXListView?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.SceneController">
+    <children>
+        <AnchorPane prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <children>
+                <VBox prefHeight="500.0" prefWidth="181.0" style="-fx-background-color: #A6B39C;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <children>
+                        <JFXButton onAction="#switchToSearchScene" prefHeight="37.0" prefWidth="182.0" text="SEARCH" textFill="WHITE">
+                            <font>
+                                <Font name="System Bold" size="16.0" />
+                            </font>
+                        </JFXButton>
+                        <JFXButton layoutX="10.0" layoutY="10.0" prefHeight="37.0" prefWidth="182.0" text="HISTORY" textFill="WHITE">
+                            <font>
+                                <Font name="System Bold" size="16.0" />
+                            </font>
+                        </JFXButton>
+                        <JFXButton layoutX="10.0" layoutY="48.0" onAction="#switchToSummaryScene" prefHeight="37.0" prefWidth="182.0" text="SUMMARY" textFill="WHITE">
+                            <font>
+                                <Font name="System Bold" size="16.0" />
+                            </font>
+                        </JFXButton>
+                    </children></VBox>
+            <Label fx:id="historyLabel" layoutX="328.0" layoutY="124.0" prefHeight="27.0" prefWidth="136.0" text="No Date Selected" AnchorPane.leftAnchor="328.0" AnchorPane.rightAnchor="136.0" AnchorPane.topAnchor="124.0">
+               <font>
+                  <Font size="16.0" />
+               </font></Label>
+            <DatePicker fx:id="datePicker" layoutX="324.0" layoutY="46.0" prefHeight="38.0" prefWidth="200.0" AnchorPane.leftAnchor="324.0" AnchorPane.rightAnchor="76.0" AnchorPane.topAnchor="46.0" />
+            <Label layoutX="218.0" layoutY="52.0" prefHeight="27.0" prefWidth="94.0" text="Select Date:" AnchorPane.leftAnchor="218.0" AnchorPane.rightAnchor="288.0" AnchorPane.topAnchor="52.0">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+            </Label>
+            <JFXListView fx:id="historyFoodList" layoutX="324.0" layoutY="151.0" prefHeight="249.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="324.0" AnchorPane.rightAnchor="76.0" AnchorPane.topAnchor="151.0" />
+            <JFXButton fx:id="searchFoodHistoryButton" buttonType="RAISED" layoutX="331.0" layoutY="90.0" onAction="#searchFoodHistory" prefHeight="27.0" prefWidth="193.0" ripplerFill="#a6b39c" text="Click To Search Food History" wrapText="true" AnchorPane.rightAnchor="76.0" AnchorPane.topAnchor="90.0">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </JFXButton>
+            <JFXButton fx:id="removeButton" buttonType="RAISED" layoutX="456.0" layoutY="124.0" onAction="#removeFood" prefHeight="27.0" prefWidth="67.0" ripplerFill="#a6b39c" text="Remove" visible="false" wrapText="true" AnchorPane.rightAnchor="76.8" AnchorPane.topAnchor="124.0">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </JFXButton>
+            </children>
+        </AnchorPane>
+    </children>
+</AnchorPane>
