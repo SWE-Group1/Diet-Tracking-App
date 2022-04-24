@@ -1,53 +1,74 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXButton?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.ProgressBar?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Font?>
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="sample.SceneController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.SceneController">
     <children>
-        <AnchorPane prefHeight="500.0" prefWidth="900.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
-                    AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <AnchorPane prefHeight="500.0" prefWidth="900.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
-                <VBox prefHeight="500.0" prefWidth="181.0" style="-fx-background-color: #A6B39C;"
-                      AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+                <Label fx:id="caloriesLabel" layoutX="492.0" layoutY="113.0" prefHeight="17.0" prefWidth="101.0" text="0" AnchorPane.rightAnchor="7.0" AnchorPane.topAnchor="113.0" />
+            <Label fx:id="fatsLabel" layoutX="492.0" layoutY="138.0" prefHeight="17.0" prefWidth="101.0" text="0" AnchorPane.rightAnchor="7.0" AnchorPane.topAnchor="138.0" />
+            <Label fx:id="saturatedFatsLabel" layoutX="492.0" layoutY="163.0" prefHeight="17.0" prefWidth="101.0" text="0" AnchorPane.rightAnchor="7.0" AnchorPane.topAnchor="163.0" />
+            <Label fx:id="transFatsLabel" layoutX="492.0" layoutY="188.0" prefHeight="17.0" prefWidth="101.0" text="0" AnchorPane.rightAnchor="7.0" AnchorPane.topAnchor="188.0" />
+            <Label fx:id="sodiumLabel" layoutX="492.0" layoutY="210.0" prefHeight="17.0" prefWidth="101.0" text="0" AnchorPane.rightAnchor="7.0" AnchorPane.topAnchor="210.0" />
+            <Label fx:id="fiberLabel" layoutX="492.0" layoutY="235.0" prefHeight="17.0" prefWidth="101.0" text="0" AnchorPane.rightAnchor="7.0" AnchorPane.topAnchor="235.0" />
+            <Label fx:id="carbsLabel" layoutX="492.0" layoutY="260.0" prefHeight="17.0" prefWidth="101.0" text="0" AnchorPane.rightAnchor="7.0" AnchorPane.topAnchor="260.0" />
+            <Label fx:id="sugarsLabel" layoutX="492.0" layoutY="287.0" prefHeight="17.0" prefWidth="101.0" text="0" AnchorPane.rightAnchor="7.0" AnchorPane.topAnchor="287.0" />
+            <Label fx:id="proteinLabel" layoutX="492.0" layoutY="312.0" prefHeight="17.0" prefWidth="101.0" text="0" AnchorPane.rightAnchor="7.0" AnchorPane.topAnchor="312.0" />
+            <Label fx:id="cholesterolLabel" layoutX="492.0" layoutY="338.0" prefHeight="17.0" prefWidth="101.0" text="0" AnchorPane.rightAnchor="7.0" AnchorPane.topAnchor="338.0" />
+                <Label layoutX="247.0" layoutY="14.0" prefHeight="53.0" prefWidth="301.0" text="Daily Summary Values" AnchorPane.leftAnchor="246.99999999999994" AnchorPane.rightAnchor="51.666666666666686" AnchorPane.topAnchor="14.0">
+                    <font>
+                        <Font size="30.0" />
+                    </font>
+                </Label>
+                <Label layoutX="255.0" layoutY="112.0" prefHeight="17.0" prefWidth="45.0" text="Calories" AnchorPane.leftAnchor="255.0" AnchorPane.rightAnchor="300.0" AnchorPane.topAnchor="112.0" />
+                <ProgressBar fx:id="caloriesBar" layoutX="306.0" layoutY="111.0" prefHeight="18.0" prefWidth="171.0" progress="0.0" AnchorPane.leftAnchor="306.0" AnchorPane.rightAnchor="123.0" />
+            <Label layoutX="276.0" layoutY="137.0" prefHeight="17.0" prefWidth="24.0" text="Fats" AnchorPane.leftAnchor="276.0" AnchorPane.rightAnchor="300.0" AnchorPane.topAnchor="137.0" />
+            <ProgressBar fx:id="fatsBar" layoutX="306.0" layoutY="136.0" prefHeight="18.0" prefWidth="171.0" progress="0.0" AnchorPane.leftAnchor="306.0" AnchorPane.rightAnchor="123.0" />
+            <Label layoutX="222.0" layoutY="162.0" prefHeight="17.0" prefWidth="78.0" text="Saturated Fats" AnchorPane.leftAnchor="222.0" AnchorPane.rightAnchor="300.0" AnchorPane.topAnchor="162.0" />
+            <ProgressBar fx:id="saturatedFatsBar" layoutX="306.0" layoutY="161.0" prefHeight="18.0" prefWidth="171.0" progress="0.0" AnchorPane.leftAnchor="306.0" AnchorPane.rightAnchor="123.0" />
+            <Label layoutX="244.0" layoutY="187.0" prefHeight="17.0" prefWidth="56.0" text="Trans Fat" AnchorPane.leftAnchor="244.0" AnchorPane.rightAnchor="300.0" AnchorPane.topAnchor="187.0" />
+            <ProgressBar fx:id="transFatBar" layoutX="306.0" layoutY="186.0" prefHeight="18.0" prefWidth="171.0" progress="0.0" AnchorPane.leftAnchor="306.0" AnchorPane.rightAnchor="123.0" />
+            <Label layoutX="255.0" layoutY="209.0" prefHeight="17.0" prefWidth="45.0" text="Sodium" AnchorPane.leftAnchor="255.0" AnchorPane.rightAnchor="300.0" AnchorPane.topAnchor="209.0" />
+            <ProgressBar fx:id="sodiumBar" layoutX="306.0" layoutY="208.0" prefHeight="18.0" prefWidth="171.0" progress="0.0" AnchorPane.leftAnchor="306.0" AnchorPane.rightAnchor="123.0" />
+            <Label layoutX="269.0" layoutY="234.0" prefHeight="17.0" prefWidth="31.0" text="Fiber" AnchorPane.leftAnchor="269.0" AnchorPane.rightAnchor="300.0" AnchorPane.topAnchor="234.0" />
+            <ProgressBar fx:id="fiberBar" layoutX="306.0" layoutY="233.0" prefHeight="18.0" prefWidth="171.0" progress="0.0" AnchorPane.leftAnchor="306.0" AnchorPane.rightAnchor="123.0" />
+            <Label layoutX="222.0" layoutY="259.0" prefHeight="17.0" prefWidth="78.0" text="Carbohydrates" AnchorPane.leftAnchor="222.0" AnchorPane.rightAnchor="300.0" AnchorPane.topAnchor="259.0" />
+            <ProgressBar fx:id="carbsBar" layoutX="306.0" layoutY="258.0" prefHeight="18.0" prefWidth="171.0" progress="0.0" AnchorPane.leftAnchor="306.0" AnchorPane.rightAnchor="123.0" />
+            <Label layoutX="262.0" layoutY="286.0" prefHeight="17.0" prefWidth="38.0" text="Sugars" AnchorPane.leftAnchor="262.0" AnchorPane.rightAnchor="300.0" AnchorPane.topAnchor="286.0" />
+            <ProgressBar fx:id="sugarsBar" layoutX="306.0" layoutY="285.0" prefHeight="18.0" prefWidth="171.0" progress="0.0" AnchorPane.leftAnchor="306.0" AnchorPane.rightAnchor="123.0" />
+            <Label layoutX="262.0" layoutY="311.0" prefHeight="17.0" prefWidth="38.0" text="Protein" AnchorPane.leftAnchor="262.0" AnchorPane.rightAnchor="300.0" AnchorPane.topAnchor="311.0" />
+            <ProgressBar fx:id="proteinBar" layoutX="306.0" layoutY="310.0" prefHeight="18.0" prefWidth="171.0" progress="0.0" AnchorPane.leftAnchor="306.0" AnchorPane.rightAnchor="123.0" />
+            <Label layoutX="236.0" layoutY="337.0" prefHeight="17.0" prefWidth="64.0" text="Cholesterol" AnchorPane.leftAnchor="236.0" AnchorPane.rightAnchor="300.0" AnchorPane.topAnchor="337.0" />
+            <ProgressBar fx:id="cholesterolBar" layoutX="306.0" layoutY="336.0" prefHeight="18.0" prefWidth="171.0" progress="0.0" AnchorPane.leftAnchor="306.0" AnchorPane.rightAnchor="123.0" />
+                <VBox prefHeight="500.0" prefWidth="181.0" style="-fx-background-color: #A6B39C;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
                     <children>
-                        <JFXButton onAction="#switchToSearchScene" prefHeight="37.0" prefWidth="182.0" text="SEARCH"
-                                   textFill="WHITE">
+                        <JFXButton onAction="#switchToSearchScene" prefHeight="37.0" prefWidth="182.0" text="SEARCH" textFill="WHITE">
                             <font>
-                                <Font name="System Bold" size="16.0"/>
+                                <Font name="System Bold" size="16.0" />
                             </font>
                         </JFXButton>
-                        <JFXButton layoutX="10.0" layoutY="10.0" onAction="#switchToHistoryScene" prefHeight="37.0"
-                                   prefWidth="182.0" text="HISTORY" textFill="WHITE">
+                        <JFXButton layoutX="10.0" layoutY="10.0" onAction="#switchToHistoryScene" prefHeight="37.0" prefWidth="182.0" text="HISTORY" textFill="WHITE">
                             <font>
-                                <Font name="System Bold" size="16.0"/>
+                                <Font name="System Bold" size="16.0" />
                             </font>
                         </JFXButton>
-                        <JFXButton layoutX="10.0" layoutY="48.0" prefHeight="37.0" prefWidth="182.0" text="SUMMARY"
-                                   textFill="WHITE">
+                        <JFXButton layoutX="10.0" layoutY="48.0" prefHeight="37.0" prefWidth="182.0" text="SUMMARY" textFill="WHITE">
                             <font>
-                                <Font name="System Bold" size="16.0"/>
+                                <Font name="System Bold" size="16.0" />
                             </font>
                         </JFXButton>
                     </children>
                 </VBox>
-                <Label layoutX="247.0" layoutY="14.0" prefHeight="53.0" prefWidth="301.0" text="Daily Summary Values"
-                       AnchorPane.topAnchor="14.0">
-                    <font>
-                        <Font size="30.0"/>
-                    </font>
-                </Label>
-                <Label layoutX="219.0" layoutY="97.0" prefHeight="17.0" prefWidth="56.0" text="Calories"
-                       AnchorPane.leftAnchor="219.0" AnchorPane.rightAnchor="325.0" AnchorPane.topAnchor="97.0"/>
-                <ProgressBar layoutX="281.0" layoutY="96.0" prefHeight="18.0" prefWidth="223.0" progress="0.0"
-                             AnchorPane.leftAnchor="281.0" AnchorPane.rightAnchor="96.0" AnchorPane.topAnchor="96.0"/>
-                <Label layoutX="510.0" layoutY="97.0" prefHeight="17.0" prefWidth="38.0" text="0"
-                       AnchorPane.rightAnchor="52.0" AnchorPane.topAnchor="97.0"/>
+            <ButtonBar layoutX="355.0" layoutY="67.0" prefHeight="40.0" prefWidth="0.0" />
+          <Button layoutX="245.0" layoutY="70.0" mnemonicParsing="false" onAction="#testfunction" prefHeight="28.0" prefWidth="291.0" text="Display Added FoodItem">
+               <font>
+                  <Font name="Droid Sans Bold" size="14.0" />
+               </font>
+            </Button>
             </children>
         </AnchorPane>
     </children>

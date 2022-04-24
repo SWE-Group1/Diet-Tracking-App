@@ -360,34 +360,34 @@ public class SceneController {
     public void setSummaryValues() {
 
         caloriesBar.setProgress(FoodObject.dailyNutrients[0] / 2500);
-        caloriesLabel.setText(String.valueOf(FoodObject.dailyNutrients[0]));
+        caloriesLabel.setText(String.valueOf(FoodObject.dailyNutrients[0])+" kcal");
 
         fatsBar.setProgress(FoodObject.dailyNutrients[1] / 80);
-        fatsLabel.setText(String.valueOf(FoodObject.dailyNutrients[1]));
+        fatsLabel.setText(String.valueOf(FoodObject.dailyNutrients[1])+"g");
 
         saturatedFatsBar.setProgress(FoodObject.dailyNutrients[2] / 20);
-        saturatedFatsLabel.setText(String.valueOf(FoodObject.dailyNutrients[2]));
+        saturatedFatsLabel.setText(String.valueOf(FoodObject.dailyNutrients[2])+"g");
 
         transFatBar.setProgress(FoodObject.dailyNutrients[3] / 3);
-        transFatsLabel.setText(String.valueOf(FoodObject.dailyNutrients[3]));
+        transFatsLabel.setText(String.valueOf(FoodObject.dailyNutrients[3])+"g");
 
         sodiumBar.setProgress(FoodObject.dailyNutrients[4] / 2500 / 2500);
-        sodiumLabel.setText(String.valueOf(FoodObject.dailyNutrients[4]));
+        sodiumLabel.setText(String.valueOf(FoodObject.dailyNutrients[4])+"mg");
 
         fiberBar.setProgress(FoodObject.dailyNutrients[5] / 80);
-        fiberLabel.setText(String.valueOf(FoodObject.dailyNutrients[5]));
+        fiberLabel.setText(String.valueOf(FoodObject.dailyNutrients[5])+"g");
 
         carbsBar.setProgress(FoodObject.dailyNutrients[6] / 500);
-        carbsLabel.setText(String.valueOf(FoodObject.dailyNutrients[6]));
+        carbsLabel.setText(String.valueOf(FoodObject.dailyNutrients[6])+"g");
 
         sugarsBar.setProgress(FoodObject.dailyNutrients[7] / 80);
-        sugarsLabel.setText(String.valueOf(FoodObject.dailyNutrients[7]));
+        sugarsLabel.setText(String.valueOf(FoodObject.dailyNutrients[7])+"g");
 
         proteinBar.setProgress(FoodObject.dailyNutrients[8] / 100);
-        proteinLabel.setText(String.valueOf(FoodObject.dailyNutrients[8]));
+        proteinLabel.setText(String.valueOf(FoodObject.dailyNutrients[8])+"g");
 
         cholesterolBar.setProgress(FoodObject.dailyNutrients[9] / 400);
-        cholesterolLabel.setText(String.valueOf(FoodObject.dailyNutrients[9]));
+        cholesterolLabel.setText(String.valueOf(FoodObject.dailyNutrients[9])+"mg");
     }
 
 
