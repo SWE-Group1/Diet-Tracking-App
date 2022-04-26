@@ -371,7 +371,7 @@ public class SceneController {
         transFatBar.setProgress(FoodObject.dailyNutrients[3] / 3);
         transFatsLabel.setText(String.valueOf(FoodObject.dailyNutrients[3])+"g");
 
-        sodiumBar.setProgress(FoodObject.dailyNutrients[4] / 2500 / 2500);
+        sodiumBar.setProgress(FoodObject.dailyNutrients[4] / 2500);
         sodiumLabel.setText(String.valueOf(FoodObject.dailyNutrients[4])+"mg");
 
         fiberBar.setProgress(FoodObject.dailyNutrients[5] / 80);
